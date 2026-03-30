@@ -7,137 +7,132 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg-dark: #3f3f41;
-      --bg-light: #f4f4f5;
-      --surface: #ffffff;
-      --text-light: #f2f2f2;
-      --text-dark: #1d1d1f;
-      --muted-light: rgba(255,255,255,.72);
-      --muted-dark: #666a73;
-      --line-light: rgba(255,255,255,.12);
-      --line-dark: rgba(0,0,0,.08);
-      --accent: #29a9ff;
-      --max-width: 1280px;
-      --radius: 28px;
-      --shadow: 0 20px 60px rgba(0, 0, 0, .12);
+    :root{
+      --bg-dark:#434345;
+      --bg-light:#f4f4f4;
+      --white:#ffffff;
+      --text-light:#f1f1f1;
+      --text-dark:#1a1a1a;
+      --muted-light:rgba(255,255,255,.74);
+      --muted-dark:#666;
+      --line-light:rgba(255,255,255,.09);
+      --line-dark:rgba(0,0,0,.08);
+      --accent:#29a9ff;
+      --yellow:#e4c300;
+      --max-width:1280px;
+      --radius:28px;
     }
 
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text-dark);
-      background: var(--bg-light);
-      line-height: 1.6;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
+    html{
+      scroll-behavior:smooth;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    body{
+      font-family:"Inter", sans-serif;
+      background:var(--bg-light);
+      color:var(--text-dark);
+      line-height:1.5;
     }
 
-    .container {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin: 0 auto;
+    img,
+    video{
+      display:block;
+      max-width:100%;
     }
 
-    .section-label {
-      font-size: .82rem;
-      font-weight: 600;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      opacity: .78;
-      margin-bottom: 1rem;
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(29, 29, 31, .22);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+    .container{
+      width:min(calc(100% - 48px), var(--max-width));
+      margin:0 auto;
     }
 
-    .site-header-inner {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 76px;
-      gap: 24px;
+    /* top nav */
+    .site-nav{
+      background:var(--bg-dark);
+      color:var(--white);
+      padding:22px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
 
-    .brand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.6rem;
-      color: #fff;
-      letter-spacing: .04em;
+    .site-nav-inner{
+      width:min(calc(100% - 48px), var(--max-width));
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
     }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      color: rgba(255,255,255,.85);
-      font-size: .95rem;
+    .site-brand{
+      font-size:1rem;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.92);
     }
 
-    .nav a:hover { color: #fff; }
-
-    .hero {
-      background: var(--bg-dark);
-      color: var(--text-light);
-      padding: 64px 0 90px;
-      overflow: hidden;
+    .site-menu{
+      display:flex;
+      gap:24px;
+      font-size:.95rem;
+      color:rgba(255,255,255,.76);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      align-items: start;
-      gap: 56px;
+    .site-menu a:hover{
+      color:#fff;
     }
 
-    .portfolio-frame {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 28px;
+    /* hero header block */
+    .hero-header{
+      background:var(--bg-dark);
+      color:var(--text-light);
+      padding:72px 0 40px;
     }
 
-    .portfolio-title {
-      display: inline-block;
-      position: relative;
-      padding: 14px 22px;
-      line-height: 1;
-      border: 2px solid var(--accent);
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      letter-spacing: .04em;
-      color: #e9e9ea;
-      text-transform: uppercase;
+    .hero-header-inner{
+      position:relative;
+      min-height:300px;
     }
 
-    .portfolio-title::after {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: calc(100% + 10px);
-      height: calc(100% + 10px);
-      pointer-events: none;
-      background-repeat: no-repeat;
+    .portfolio-block{
+      max-width:760px;
+      position:relative;
+    }
+
+    .portfolio-title{
+      display:inline-block;
+      position:relative;
+      padding:14px 20px;
+      line-height:1;
+      border:2px solid var(--accent);
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(3.3rem, 9vw, 6.8rem);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#ececec;
+    }
+
+    .portfolio-title::after{
+      content:"";
+      position:absolute;
+      top:-5px;
+      left:-5px;
+      width:calc(100% + 10px);
+      height:calc(100% + 10px);
+      pointer-events:none;
+      background-repeat:no-repeat;
       background-image:
         linear-gradient(var(--accent),var(--accent)),
         linear-gradient(var(--accent),var(--accent)),
@@ -156,10 +151,10 @@
         linear-gradient(#ffffff,#ffffff),
         linear-gradient(#ffffff,#ffffff);
       background-size:
-        10px 10px, 10px 10px, 10px 10px, 10px 10px,
-        10px 10px, 10px 10px, 10px 10px, 10px 10px,
-        6px 6px, 6px 6px, 6px 6px, 6px 6px,
-        6px 6px, 6px 6px, 6px 6px, 6px 6px;
+        10px 10px,10px 10px,10px 10px,10px 10px,
+        10px 10px,10px 10px,10px 10px,10px 10px,
+        6px 6px,6px 6px,6px 6px,6px 6px,
+        6px 6px,6px 6px,6px 6px,6px 6px;
       background-position:
         left top,
         center top,
@@ -179,412 +174,325 @@
         right 2px bottom 2px;
     }
 
-    .hero-subline {
-      display: inline-block;
-      margin-left: 160px;
-      margin-top: 10px;
-      padding: 18px 26px;
-      border: 2px solid rgba(255, 208, 0, .95);
-      border-radius: 999px;
-      transform: rotate(-5deg);
-      font-size: 1.02rem;
-      color: #ececec;
-      box-shadow: inset 0 0 0 2px rgba(255, 208, 0, .32);
+    .signature-line{
+      width:360px;
+      max-width:70%;
+      margin:18px 0 10px 28px;
+      opacity:.92;
     }
 
-    .hero-subline strong {
-      display: block;
-      font-size: 1.1rem;
-      font-weight: 600;
+    .name-badge{
+      width:max-content;
+      max-width:100%;
+      margin-left:240px;
+      padding:16px 28px;
+      border:2px solid var(--yellow);
+      border-radius:999px;
+      transform:rotate(-5deg);
+      color:#ededed;
+      box-shadow:inset 0 0 0 2px rgba(228,195,0,.25);
     }
 
-    .hero-copy {
-      max-width: 620px;
-      margin-top: 40px;
+    .name-badge strong{
+      display:block;
+      font-size:1.05rem;
+      font-weight:600;
     }
 
-    .hero-copy p {
-      color: var(--muted-light);
-      font-size: 1.04rem;
-      max-width: 56ch;
-      margin: 0 0 28px;
+    .name-badge span{
+      font-size:1rem;
+      color:rgba(255,255,255,.82);
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+    /* separate section below header */
+    .intro-work{
+      background:var(--bg-dark);
+      color:var(--white);
+      padding:60px 0 110px;
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      transition: .25s ease;
+    .section-label{
+      font-size:.82rem;
+      font-weight:600;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.72);
+      margin-bottom:24px;
     }
 
-    .button-primary {
-      background: #fff;
-      color: #111;
+    .featured-grid{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:64px;
+      align-items:start;
     }
 
-    .button-primary:hover { transform: translateY(-2px); }
-
-    .button-secondary {
-      border: 1px solid rgba(255,255,255,.18);
-      color: #fff;
+    .phone-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding-top:8px;
     }
 
-    .button-secondary:hover {
-      background: rgba(255,255,255,.06);
-      transform: translateY(-2px);
+    .phone-video{
+      width:100%;
+      max-width:270px;
+      border-radius:32px;
+      object-fit:cover;
+      box-shadow:0 18px 40px rgba(0,0,0,.24);
     }
 
-    .project-highlight {
-      display: grid;
-      grid-template-columns: .74fr 1fr;
-      gap: 28px;
-      padding: 28px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line-light);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+    .featured-copy h2{
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+      margin-bottom:20px;
+      max-width:12ch;
     }
 
-    .device-card,
-    .gallery-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 24px;
-      overflow: hidden;
-      min-height: 100%;
+    .featured-copy p.lead{
+      max-width:62ch;
+      color:var(--muted-light);
+      margin-bottom:28px;
+      font-size:1rem;
     }
 
-    .device-card img,
-    .device-card video {
-      width: 100%;
-      max-width: 280px;
-      height: auto;
-      display: block;
+    .info-columns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px 28px;
+      margin-bottom:30px;
     }
 
-    .project-meta {
-      display: grid;
-      gap: 24px;
-      align-content: start;
+    .info-box h3{
+      font-size:1.05rem;
+      margin-bottom:10px;
+      color:#fff;
     }
 
-    .project-meta h2 {
-      margin: 0;
-      font-size: clamp(1.9rem, 4vw, 2.6rem);
-      line-height: 1.12;
-      letter-spacing: -.03em;
+    .info-box p,
+    .info-box ul{
+      font-size:.96rem;
+      color:var(--muted-light);
     }
 
-    .lead {
-      color: var(--muted-light);
-      margin: 0;
-      max-width: 60ch;
+    .info-box ul{
+      padding-left:18px;
     }
 
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+      margin-top:10px;
     }
 
-    .meta-card {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.08);
+    .metric{
+      padding:16px;
+      border:1px solid var(--line-light);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
     }
 
-    .meta-card h3 {
-      margin: 0 0 10px;
-      font-size: 1rem;
-      color: #fff;
+    .metric strong{
+      display:block;
+      font-size:1.55rem;
+      margin-bottom:6px;
+      color:#fff;
     }
 
-    .meta-card p,
-    .meta-card li {
-      color: var(--muted-light);
-      margin: 0;
-      font-size: .95rem;
+    .metric span{
+      font-size:.92rem;
+      color:var(--muted-light);
     }
 
-    .meta-card ul {
-      margin: 0;
-      padding-left: 18px;
+    .single-gallery{
+      margin-top:48px;
     }
 
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+    .single-gallery img{
+      width:100%;
+      max-width:820px;
+      border-radius:24px;
+      display:block;
     }
 
-    .metric {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
+    /* second section */
+    .case-light{
+      background:var(--bg-light);
+      padding:90px 0 100px;
     }
 
-    .metric strong {
-      display: block;
-      font-size: 1.55rem;
-      line-height: 1;
-      margin-bottom: 6px;
+    .case-top-label{
+      font-size:.9rem;
+      color:#6f6f6f;
+      margin-bottom:18px;
     }
 
-    .metric span {
-      color: var(--muted-light);
-      font-size: .92rem;
+    .case-title{
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.1;
+      letter-spacing:-.03em;
+      margin-bottom:34px;
+      max-width:14ch;
     }
 
-    .gallery {
-      margin-top: 32px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+    .case-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:42px;
+      align-items:start;
+      background:#fff;
+      border:1px solid var(--line-dark);
+      border-radius:32px;
+      padding:36px;
     }
 
-    .gallery-card {
-      padding: 12px;
+    .case-copy p{
+      color:var(--muted-dark);
+      margin-bottom:18px;
+      max-width:62ch;
     }
 
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 18px;
-      aspect-ratio: 10 / 18;
-      background: rgba(255,255,255,.06);
+    .case-info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:28px;
     }
 
-    .section-light {
-      padding: 96px 0;
-      background: var(--bg-light);
-      color: var(--text-dark);
+    .case-card{
+      background:#fafafa;
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:20px;
+      padding:18px;
     }
 
-    .section-heading {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 40px;
+    .case-card h4{
+      margin-bottom:10px;
+      font-size:1rem;
     }
 
-    .section-heading h2 {
-      margin: 0;
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.08;
-      letter-spacing: -.04em;
+    .case-card p,
+    .case-card ul{
+      color:var(--muted-dark);
+      font-size:.95rem;
     }
 
-    .section-heading p {
-      margin: 0;
-      color: var(--muted-dark);
-      max-width: 48ch;
+    .case-card ul{
+      padding-left:18px;
     }
 
-    .case-study {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 36px;
-      align-items: start;
-      background: #fff;
-      border: 1px solid var(--line-dark);
-      border-radius: 32px;
-      padding: 36px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.05);
+    .visual-stack{
+      display:grid;
+      gap:18px;
     }
 
-    .case-copy h3 {
-      margin: 0 0 16px;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      line-height: 1.14;
-      letter-spacing: -.03em;
+    .visual-stack img{
+      border-radius:22px;
+      border:1px solid rgba(0,0,0,.06);
+      background:#f7f7f7;
+      box-shadow:0 12px 30px rgba(0,0,0,.06);
     }
 
-    .case-copy p {
-      margin: 0 0 18px;
-      color: var(--muted-dark);
+    .visual-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 26px;
+    .footer{
+      background:var(--bg-light);
+      border-top:1px solid rgba(0,0,0,.08);
+      padding:28px 0 42px;
     }
 
-    .info-card {
-      padding: 18px;
-      border-radius: 22px;
-      background: #fafafa;
-      border: 1px solid rgba(0,0,0,.06);
+    .footer-inner{
+      width:min(calc(100% - 48px), var(--max-width));
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      color:#666;
+      font-size:.94rem;
     }
 
-    .info-card h4 {
-      margin: 0 0 10px;
-      font-size: 1rem;
-    }
-
-    .info-card p,
-    .info-card li {
-      margin: 0;
-      color: var(--muted-dark);
-      font-size: .95rem;
-    }
-
-    .info-card ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .visual-stack {
-      display: grid;
-      gap: 18px;
-    }
-
-    .visual-main,
-    .visual-row img {
-      border-radius: 24px;
-      border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 14px 36px rgba(0,0,0,.06);
-      background: #f8f8f8;
-    }
-
-    .visual-main {
-      overflow: hidden;
-      min-height: 280px;
-    }
-
-    .visual-main img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .visual-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .footer {
-      padding: 28px 0 46px;
-      background: var(--bg-light);
-      border-top: 1px solid rgba(0,0,0,.08);
-    }
-
-    .footer-inner {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      color: var(--muted-dark);
-      font-size: .95rem;
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .case-study,
-      .project-highlight {
-        grid-template-columns: 1fr;
+    @media (max-width: 1100px){
+      .featured-grid,
+      .case-grid{
+        grid-template-columns:1fr;
       }
 
-      .section-heading {
-        grid-template-columns: 1fr;
+      .name-badge{
+        margin-left:100px;
       }
 
-      .hero-subline {
-        margin-left: 60px;
+      .featured-copy h2{
+        max-width:none;
+      }
+
+      .case-title{
+        max-width:none;
       }
     }
 
-    @media (max-width: 760px) {
-      .site-header-inner {
-        min-height: 70px;
+    @media (max-width: 760px){
+      .site-nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
       }
 
-      .nav {
-        gap: 14px;
-        font-size: .88rem;
+      .site-menu{
+        gap:16px;
+        flex-wrap:wrap;
       }
 
-      .hero {
-        padding: 42px 0 64px;
+      .hero-header{
+        padding:44px 0 24px;
       }
 
-      .portfolio-title {
-        padding: 10px 16px;
+      .signature-line{
+        margin-left:10px;
+        width:220px;
       }
 
-      .hero-subline {
-        margin-left: 18px;
-        padding: 14px 20px;
-        font-size: .95rem;
+      .name-badge{
+        margin-left:24px;
+        padding:14px 20px;
       }
 
-      .project-highlight,
-      .case-study {
-        padding: 20px;
+      .intro-work{
+        padding:40px 0 80px;
       }
 
-      .meta-grid,
+      .featured-grid,
+      .info-columns,
       .metrics,
-      .info-grid,
-      .gallery,
-      .visual-row {
-        grid-template-columns: 1fr;
+      .case-info-grid,
+      .visual-row{
+        grid-template-columns:1fr;
       }
 
-      .section-light {
-        padding: 72px 0;
+      .case-light{
+        padding:70px 0 80px;
       }
 
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
+      .case-grid{
+        padding:22px;
       }
-        .phone-video {
-          width: 100%;
-          max-width: 280px;
-          height: auto;
-          display: block;
-          border-radius: 28px;
-          object-fit: cover;
-          box-shadow: 0 14px 36px rgba(0,0,0,.18);
-        }
 
-        .gallery-card-wide {
-          grid-column: 1 / -1;
-        }
-
-        .gallery-card-wide img {
-          width: 100%;
-          height: auto;
-          aspect-ratio: auto;
-          object-fit: contain;
-        }
-         }
+      .footer-inner{
+        flex-direction:column;
+      }
+    }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-header-inner">
-      <a href="#top" class="brand">Matija Moharić</a>
-      <nav class="nav">
+
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <div class="site-brand">Matija Moharić</div>
+      <nav class="site-menu">
         <a href="#work">Work</a>
         <a href="#branding">Branding</a>
         <a href="#contact">Contact</a>
@@ -592,181 +500,173 @@
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="portfolio-frame">
-            <h1 class="portfolio-title">Portfolio</h1>
-          </div>
-          <div class="hero-subline">
-            <strong>Matija Moharić</strong>
-            UX/UI Designer
-          </div>
+  <section class="hero-header">
+    <div class="container hero-header-inner">
+      <div class="portfolio-block">
+        <h1 class="portfolio-title">Portfolio</h1>
 
-          <div class="hero-copy">
-            <div class="section-label">UX/UI</div>
-            <p>
-              I design digital experiences that feel clear, useful, and visually refined. My work focuses on turning complex flows into intuitive products that help users move with confidence.
-            </p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#work">View selected work</a>
-              <a class="button button-secondary" href="#contact">Get in touch</a>
-            </div>
-          </div>
+        <svg class="signature-line" viewBox="0 0 420 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 24C18 56 66 62 128 45C186 29 228 32 274 36C319 40 347 48 370 47C391 46 403 37 412 24"
+                stroke="#d9d9d9"
+                stroke-width="2"
+                stroke-linecap="round"/>
+          <path d="M300 39C300 39 316 33 328 40C340 47 344 58 355 58C365 58 373 50 378 41"
+                stroke="#d9d9d9"
+                stroke-width="2"
+                stroke-linecap="round"/>
+        </svg>
+
+        <div class="name-badge">
+          <strong>Matija Moharić</strong>
+          <span>UX/UI Designer</span>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="device-card">
+  <section class="intro-work" id="work">
+    <div class="container">
+      <div class="section-label">UX/UI</div>
+
+      <div class="featured-grid">
+        <div class="phone-wrap">
           <video class="phone-video" autoplay muted loop playsinline preload="auto">
-            <source src="images/Video1.mp4" type="video/mp4" />
+            <source src="images/video1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
 
-          <div class="project-meta">
-            <div>
-              <div class="section-label">Featured Case Study</div>
-              <h2>EcoTrip — Designing a more sustainable travel experience</h2>
-            </div>
+        <div class="featured-copy">
+          <h2>EcoTrip — Designing a sustainable travel experience</h2>
 
-            <p class="lead">
-              EcoTrip is a mobile travel app concept that helps users discover and book lower-impact trips with less friction, clearer guidance, and more relevant recommendations.
-            </p>
-
-            <div class="meta-grid">
-              <article class="meta-card">
-                <h3>Challenge</h3>
-                <p>
-                  Travelers often face too many generic options, making it difficult to compare choices and confidently select eco-conscious alternatives.
-                </p>
-              </article>
-
-              <article class="meta-card">
-                <h3>Approach</h3>
-                <ul>
-                  <li>Reduced cognitive load with a simpler onboarding flow</li>
-                  <li>Highlighted sustainable options earlier in the journey</li>
-                  <li>Designed a fast, mobile-first browsing experience</li>
-                </ul>
-              </article>
-
-              <article class="meta-card">
-                <h3>Solution</h3>
-                <p>
-                  Personalized destination recommendations, stronger sustainability cues, and a cleaner structure that helps users scan, compare, and act faster.
-                </p>
-              </article>
-
-              <article class="meta-card">
-                <h3>Reflection</h3>
-                <p>
-                  The project strengthened the balance between clarity and inspiration, showing how thoughtful structure can improve usability without losing visual warmth.
-                </p>
-              </article>
-            </div>
-
-            <div class="metrics">
-              <div class="metric">
-                <strong>35%</strong>
-                <span>Faster booking flow</span>
-              </div>
-              <div class="metric">
-                <strong>50%</strong>
-                <span>Stronger visibility of eco options</span>
-              </div>
-              <div class="metric">
-                <strong>25%</strong>
-                <span>Higher onboarding completion</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-        <div class="gallery">
-          <article class="gallery-card gallery-card-wide">
-            <img src="images/Image2.png" alt="EcoTrip app screens overview" />
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-light" id="branding">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <div class="section-label">UX/UI + Branding</div>
-            <h2>Tiskly — A clearer 3D packaging design experience</h2>
-          </div>
-          <p>
-            A web platform concept for uploading artwork to 3D box models, helping users preview packaging with more confidence before production.
+          <p class="lead">
+            EcoTrip is a mobile travel concept focused on helping users discover and book more sustainable trips through a clearer, faster, and more intuitive experience.
           </p>
-        </div>
 
-        <div class="case-study">
-          <div class="case-copy">
-            <h3>Bridging the gap between 2D design files and 3D product previews</h3>
-            <p>
-              Tiskly simplifies the design-to-print process by giving users a more direct and understandable way to upload, position, and preview packaging artwork on 3D models.
-            </p>
-            <p>
-              The goal was to reduce friction, lower the chance of print errors, and create a more intuitive workflow for users who need visual feedback before placing an order.
-            </p>
+          <div class="info-columns">
+            <div class="info-box">
+              <h3>Overview</h3>
+              <p>
+                The goal was to create a travel experience that feels simple to use while making eco-conscious decisions more visible and easier to understand.
+              </p>
+            </div>
 
-            <div class="info-grid">
-              <article class="info-card">
-                <h4>Problem</h4>
-                <ul>
-                  <li>Switching between multiple tools slowed the process</li>
-                  <li>It was difficult to imagine how flat artwork would translate into 3D</li>
-                  <li>Limited visual feedback increased the risk of mistakes</li>
-                </ul>
-              </article>
+            <div class="info-box">
+              <h3>Problem</h3>
+              <p>
+                Users often face too many generic travel choices, limited sustainability clarity, and slow decision-making during booking.
+              </p>
+            </div>
 
-              <article class="info-card">
-                <h4>Solution</h4>
-                <ul>
-                  <li>Real-time 3D preview of uploaded designs</li>
-                  <li>Simple artwork upload and placement flow</li>
-                  <li>Clear controls for adjusting layout and positioning</li>
-                </ul>
-              </article>
+            <div class="info-box">
+              <h3>Solution</h3>
+              <ul>
+                <li>Personalized travel recommendations</li>
+                <li>Clear visibility of eco-friendly options</li>
+                <li>Simple mobile-first booking flow</li>
+              </ul>
+            </div>
 
-              <article class="info-card">
-                <h4>Design approach</h4>
-                <p>
-                  A calm, practical interface focused on clarity first: fewer distractions, immediate feedback, and a layout aligned with modern e-commerce expectations.
-                </p>
-              </article>
-
-              <article class="info-card">
-                <h4>Outcome</h4>
-                <p>
-                  A more confident validation process, reduced uncertainty before production, and a smoother bridge between concept, preview, and final order.
-                </p>
-              </article>
+            <div class="info-box">
+              <h3>Design Approach</h3>
+              <ul>
+                <li>Reduced cognitive load through clearer structure</li>
+                <li>Higher visual clarity for key user actions</li>
+                <li>Improved scanning and faster comparison</li>
+              </ul>
             </div>
           </div>
 
-          <div class="visual-stack">
-            <div class="visual-main">
-              <img src="images/tiskly-hero-preview.png" alt="Tiskly hero preview" />
+          <div class="metrics">
+            <div class="metric">
+              <strong>35%</strong>
+              <span>Faster booking flow</span>
             </div>
-            <div class="visual-row">
-              <img src="images/tiskly-ui-left.png" alt="Tiskly upload sidebar" />
-              <img src="images/tiskly-ui-right.png" alt="Tiskly product detail panel" />
+            <div class="metric">
+              <strong>50%</strong>
+              <span>Better visibility of eco options</span>
+            </div>
+            <div class="metric">
+              <strong>25%</strong>
+              <span>Higher onboarding completion</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+
+      <div class="single-gallery">
+        <img src="images/image2.png" alt="EcoTrip app screens overview">
+      </div>
+    </div>
+  </section>
+
+  <section class="case-light" id="branding">
+    <div class="container">
+      <div class="case-top-label">UX/UI + Branding</div>
+      <h2 class="case-title">Tiskly — 3D packaging design experience</h2>
+
+      <div class="case-grid">
+        <div class="case-copy">
+          <p>
+            Tiskly is a web platform concept that allows users to upload and preview their designs directly on 3D packaging models before production.
+          </p>
+
+          <p>
+            The project focused on making the design-to-print process feel more visual, more intuitive, and less error-prone for users who need confidence before placing an order.
+          </p>
+
+          <div class="case-info-grid">
+            <div class="case-card">
+              <h4>Problem</h4>
+              <ul>
+                <li>Designing packaging required switching between different tools</li>
+                <li>It was difficult to imagine how flat design would look in 3D</li>
+                <li>Limited preview increased the risk of mistakes</li>
+              </ul>
+            </div>
+
+            <div class="case-card">
+              <h4>Solution</h4>
+              <ul>
+                <li>Real-time 3D preview of applied artwork</li>
+                <li>Simple upload and placement workflow</li>
+                <li>Clear positioning controls and product details</li>
+              </ul>
+            </div>
+
+            <div class="case-card">
+              <h4>Design Approach</h4>
+              <p>
+                A practical, clarity-first interface with minimal distractions, immediate visual feedback, and a layout that feels familiar and modern.
+              </p>
+            </div>
+
+            <div class="case-card">
+              <h4>Outcome</h4>
+              <p>
+                A smoother validation process, fewer surprises before production, and a stronger connection between concept, preview, and final product order.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-stack">
+          <img src="images/tiskly-hero-preview.png" alt="Tiskly preview area">
+          <div class="visual-row">
+            <img src="images/tiskly-ui-left.png" alt="Tiskly left interface">
+            <img src="images/tiskly-ui-right.png" alt="Tiskly right interface">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer" id="contact">
     <div class="footer-inner">
       <div>© 2025 Matija Moharić — UX/UI Designer</div>
-      <div>Available for freelance, product, and brand-focused digital work.</div>
+      <div>Available for freelance and digital product work.</div>
     </div>
   </footer>
+
 </body>
 </html>
