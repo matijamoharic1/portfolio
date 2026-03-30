@@ -104,11 +104,17 @@
     .hero-header-inner{
       position:relative;
       min-height:300px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
 
     .portfolio-block{
       max-width:760px;
       position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
 
     .portfolio-title{
@@ -122,6 +128,11 @@
       letter-spacing:.04em;
       text-transform:uppercase;
       color:#ececec;
+      text-shadow:
+        0 2px 0 rgba(0,0,0,.4),
+        0 4px 10px rgba(0,0,0,.45),
+        0 14px 36px rgba(0,0,0,.3),
+        0 28px 60px rgba(0,0,0,.2);
     }
 
     .portfolio-title::after{
@@ -184,7 +195,7 @@
     .name-badge{
       width:max-content;
       max-width:100%;
-      margin-left:240px;
+      margin-left:0;
       padding:16px 28px;
       border:2px solid var(--yellow);
       border-radius:999px;
@@ -209,6 +220,7 @@
       background:var(--bg-dark);
       color:var(--white);
       padding:60px 0 110px;
+      border-top:1px solid rgba(255,255,255,.13);
     }
 
     .section-label{
@@ -220,26 +232,47 @@
       margin-bottom:24px;
     }
 
+    /* full-bleed half-screen layout */
     .featured-grid{
       display:grid;
-      grid-template-columns:320px 1fr;
-      gap:64px;
-      align-items:start;
+      grid-template-columns:50vw 1fr;
+      gap:0 60px;
+      align-items:center;
+      /* break left edge out to viewport */
+      margin-left:calc((100% - 100vw) / 2);
+      width:100vw;
     }
 
     .phone-wrap{
       display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      padding-top:8px;
+      justify-content:flex-end;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      padding:0;
+      height:100%;
     }
 
     .phone-video{
       width:100%;
-      max-width:270px;
-      border-radius:32px;
-      object-fit:cover;
-      box-shadow:0 18px 40px rgba(0,0,0,.24);
+      max-width:none;
+      height:auto;
+      border-radius:0;
+      object-fit:contain;
+      box-shadow:none;
+      /* dissolve the black phone-frame background into the page */
+      mix-blend-mode:screen;
+      animation:phoneFloat 6s ease-in-out infinite;
+      transform-origin:center center;
+    }
+
+    @keyframes phoneFloat{
+      0%,100%{ transform:translateY(0px); }
+      50%    { transform:translateY(-14px); }
+    }
+
+    .featured-copy{
+      padding-right:clamp(24px, 4vw, 80px);
     }
 
     .featured-copy h2{
@@ -248,6 +281,11 @@
       letter-spacing:-.03em;
       margin-bottom:20px;
       max-width:12ch;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.06),
+        0 2px 6px rgba(0,0,0,.5),
+        0 8px 24px rgba(0,0,0,.35),
+        0 20px 50px rgba(0,0,0,.2);
     }
 
     .featured-copy p.lead{
@@ -268,6 +306,7 @@
       font-size:1.05rem;
       margin-bottom:10px;
       color:#fff;
+      text-shadow:0 1px 4px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.25);
     }
 
     .info-box p,
@@ -299,6 +338,7 @@
       font-size:1.55rem;
       margin-bottom:6px;
       color:#fff;
+      text-shadow:0 0 18px rgba(41,169,255,.45), 0 2px 6px rgba(0,0,0,.4);
     }
 
     .metric span{
@@ -307,20 +347,45 @@
     }
 
     .single-gallery{
-      margin-top:48px;
+      margin-top:64px;
     }
 
     .single-gallery img{
       width:100%;
-      max-width:820px;
-      border-radius:24px;
+      max-width:100%;
+      border-radius:0;
       display:block;
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,.6)) drop-shadow(0 8px 20px rgba(0,0,0,.4));
+    }
+
+    /* ── fade-up animation ── */
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(36px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+
+    .fade-up{
+      opacity:0;
+      transform:translateY(36px);
+      transition:opacity .75s cubic-bezier(.22,1,.36,1) var(--delay,0s),
+                 transform .75s cubic-bezier(.22,1,.36,1) var(--delay,0s);
+    }
+
+    .fade-up.visible{
+      opacity:1;
+      transform:translateY(0);
     }
 
     /* second section */
     .case-light{
       background:var(--bg-light);
       padding:90px 0 100px;
+    }
+
+    .tiskly-logo{
+      max-height:80px;
+      width:auto;
+      margin-bottom:14px;
     }
 
     .case-top-label{
@@ -389,10 +454,11 @@
     }
 
     .visual-stack img{
-      border-radius:22px;
-      border:1px solid rgba(0,0,0,.06);
-      background:#f7f7f7;
-      box-shadow:0 12px 30px rgba(0,0,0,.06);
+      border-radius:0;
+      border:none;
+      background:transparent;
+      box-shadow:none;
+      filter:drop-shadow(0 20px 50px rgba(0,0,0,.3));
     }
 
     .visual-row{
@@ -418,13 +484,20 @@
     }
 
     @media (max-width: 1100px){
-      .featured-grid,
-      .case-grid{
+      .featured-grid{
         grid-template-columns:1fr;
+        margin-left:0;
+        width:100%;
       }
 
-      .name-badge{
-        margin-left:100px;
+      .phone-wrap{
+        justify-content:center;
+        max-height:70vw;
+        overflow:hidden;
+      }
+
+      .case-grid{
+        grid-template-columns:1fr;
       }
 
       .featured-copy h2{
@@ -457,7 +530,6 @@
       }
 
       .name-badge{
-        margin-left:24px;
         padding:14px 20px;
       }
 
@@ -465,7 +537,11 @@
         padding:40px 0 80px;
       }
 
-      .featured-grid,
+      .featured-grid{
+        margin-left:0;
+        width:100%;
+      }
+
       .info-columns,
       .metrics,
       .case-info-grid,
@@ -505,16 +581,7 @@
       <div class="portfolio-block">
         <h1 class="portfolio-title">Portfolio</h1>
 
-        <svg class="signature-line" viewBox="0 0 420 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M8 24C18 56 66 62 128 45C186 29 228 32 274 36C319 40 347 48 370 47C391 46 403 37 412 24"
-                stroke="#d9d9d9"
-                stroke-width="2"
-                stroke-linecap="round"/>
-          <path d="M300 39C300 39 316 33 328 40C340 47 344 58 355 58C365 58 373 50 378 41"
-                stroke="#d9d9d9"
-                stroke-width="2"
-                stroke-linecap="round"/>
-        </svg>
+        <img class="signature-line" src="images/Image3.svg" alt="">
 
         <div class="name-badge">
           <strong>Matija Moharić</strong>
@@ -525,84 +592,92 @@
   </section>
 
   <section class="intro-work" id="work">
+
+    <!-- label stays inside normal container -->
     <div class="container">
-      <div class="section-label">UX/UI</div>
+      <div class="section-label fade-up">UX/UI</div>
+    </div>
 
-      <div class="featured-grid">
-        <div class="phone-wrap">
-          <video class="phone-video" autoplay muted loop playsinline preload="auto">
-            <source src="images/video1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
-        <div class="featured-copy">
-          <h2>EcoTrip — Designing a sustainable travel experience</h2>
-
-          <p class="lead">
-            EcoTrip is a mobile travel concept focused on helping users discover and book more sustainable trips through a clearer, faster, and more intuitive experience.
-          </p>
-
-          <div class="info-columns">
-            <div class="info-box">
-              <h3>Overview</h3>
-              <p>
-                The goal was to create a travel experience that feels simple to use while making eco-conscious decisions more visible and easier to understand.
-              </p>
-            </div>
-
-            <div class="info-box">
-              <h3>Problem</h3>
-              <p>
-                Users often face too many generic travel choices, limited sustainability clarity, and slow decision-making during booking.
-              </p>
-            </div>
-
-            <div class="info-box">
-              <h3>Solution</h3>
-              <ul>
-                <li>Personalized travel recommendations</li>
-                <li>Clear visibility of eco-friendly options</li>
-                <li>Simple mobile-first booking flow</li>
-              </ul>
-            </div>
-
-            <div class="info-box">
-              <h3>Design Approach</h3>
-              <ul>
-                <li>Reduced cognitive load through clearer structure</li>
-                <li>Higher visual clarity for key user actions</li>
-                <li>Improved scanning and faster comparison</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="metrics">
-            <div class="metric">
-              <strong>35%</strong>
-              <span>Faster booking flow</span>
-            </div>
-            <div class="metric">
-              <strong>50%</strong>
-              <span>Better visibility of eco options</span>
-            </div>
-            <div class="metric">
-              <strong>25%</strong>
-              <span>Higher onboarding completion</span>
-            </div>
-          </div>
-        </div>
+    <!-- grid breaks edge-to-edge: left half = video, right half = text -->
+    <div class="featured-grid">
+      <div class="phone-wrap fade-up">
+        <video class="phone-video" autoplay muted loop playsinline preload="auto">
+          <source src="images/Video1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
-      <div class="single-gallery">
-        <img src="images/image2.png" alt="EcoTrip app screens overview">
+      <div class="featured-copy">
+        <h2 class="fade-up">EcoTrip — Designing a sustainable travel experience</h2>
+
+        <p class="lead fade-up">
+          EcoTrip is a mobile travel concept focused on helping users discover and book more sustainable trips through a clearer, faster, and more intuitive experience.
+        </p>
+
+        <div class="info-columns">
+          <div class="info-box fade-up" style="--delay:.1s">
+            <h3>Overview</h3>
+            <p>
+              The goal was to create a travel experience that feels simple to use while making eco-conscious decisions more visible and easier to understand.
+            </p>
+          </div>
+
+          <div class="info-box fade-up" style="--delay:.2s">
+            <h3>Problem</h3>
+            <p>
+              Users often face too many generic travel choices, limited sustainability clarity, and slow decision-making during booking.
+            </p>
+          </div>
+
+          <div class="info-box fade-up" style="--delay:.3s">
+            <h3>Solution</h3>
+            <ul>
+              <li>Personalized travel recommendations</li>
+              <li>Clear visibility of eco-friendly options</li>
+              <li>Simple mobile-first booking flow</li>
+            </ul>
+          </div>
+
+          <div class="info-box fade-up" style="--delay:.4s">
+            <h3>Design Approach</h3>
+            <ul>
+              <li>Reduced cognitive load through clearer structure</li>
+              <li>Higher visual clarity for key user actions</li>
+              <li>Improved scanning and faster comparison</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric fade-up" style="--delay:.1s">
+            <strong>35%</strong>
+            <span>Faster booking flow</span>
+          </div>
+          <div class="metric fade-up" style="--delay:.2s">
+            <strong>50%</strong>
+            <span>Better visibility of eco options</span>
+          </div>
+          <div class="metric fade-up" style="--delay:.3s">
+            <strong>25%</strong>
+            <span>Higher onboarding completion</span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- gallery back inside container -->
+    <div class="container">
+      <div class="single-gallery fade-up">
+        <img src="images/Image2.png" alt="EcoTrip app screens overview">
+      </div>
+    </div>
+
   </section>
 
   <section class="case-light" id="branding">
     <div class="container">
       <div class="case-top-label">UX/UI + Branding</div>
+      <img src="images/Image4.svg" alt="Tiskly logo" class="tiskly-logo">
       <h2 class="case-title">Tiskly — 3D packaging design experience</h2>
 
       <div class="case-grid">
@@ -651,11 +726,7 @@
         </div>
 
         <div class="visual-stack">
-          <img src="images/tiskly-hero-preview.png" alt="Tiskly preview area">
-          <div class="visual-row">
-            <img src="images/tiskly-ui-left.png" alt="Tiskly left interface">
-            <img src="images/tiskly-ui-right.png" alt="Tiskly right interface">
-          </div>
+          <img src="images/Image5.svg" alt="Tiskly interface">
         </div>
       </div>
     </div>
@@ -667,6 +738,20 @@
       <div>Available for freelance and digital product work.</div>
     </div>
   </footer>
+
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
