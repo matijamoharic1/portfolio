@@ -925,3 +925,893 @@
 
 </body>
 </html>
+    body{
+      font-family:"Inter", sans-serif;
+      background:var(--bg-light);
+      color:var(--text-dark);
+      line-height:1.5;
+    }
+
+    img,
+    video{
+      display:block;
+      max-width:100%;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:min(calc(100% - 48px), var(--max-width));
+      margin:0 auto;
+    }
+
+    /* top nav */
+    .site-nav{
+      position:absolute;
+      inset:0 0 auto 0;
+      z-index:20;
+      background:rgba(77,77,79,.18);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      color:var(--text-light);
+      padding:22px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .site-nav-inner{
+      width:min(calc(100% - 48px), var(--max-width));
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .site-brand{
+      font-family:"Cormorant Garamond", serif;
+      font-size:1.25rem;
+      font-weight:500;
+      letter-spacing:.03em;
+      color:var(--text-light);
+      text-shadow:0 4px 18px rgba(0,0,0,.35);
+    }
+
+    .site-menu{
+      display:flex;
+      gap:6px;
+      align-items:center;
+    }
+
+    .site-menu a{
+      font-size:.8rem;
+      font-weight:500;
+      letter-spacing:.04em;
+      color:rgba(255,255,255,.82);
+      padding:7px 16px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .site-menu a:hover{
+      background:rgba(255,255,255,.08);
+      color:#ffffff;
+      border-color:rgba(255,255,255,.16);
+    }
+
+    /* hero header block */
+    .hero-header{
+      position:relative;
+      background:#4d4d4f;
+      color:var(--text-light);
+      padding:0;
+      min-height:100svh;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .hero-header-inner{
+      position:relative;
+      z-index:3;
+      width:100%;
+      min-height:100svh;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 32px 64px;
+    }
+
+    .portfolio-block{
+      width:100%;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:0;
+    }
+
+    .portfolio-title{
+      display:inline-block;
+      position:relative;
+      padding:7px 10px;
+      line-height:1;
+      border:2px solid var(--accent);
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(3.3rem, 9vw, 6.8rem);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#ececec;
+      text-shadow:none;
+    }
+
+    .portfolio-title::after{
+      content:"";
+      position:absolute;
+      top:-3px;
+      left:-3px;
+      width:calc(100% + 6px);
+      height:calc(100% + 6px);
+      pointer-events:none;
+      background-repeat:no-repeat;
+      background-image:
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(var(--accent),var(--accent)),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(#ffffff,#ffffff);
+      background-size:
+        10px 10px,10px 10px,10px 10px,10px 10px,
+        10px 10px,10px 10px,10px 10px,10px 10px,
+        6px 6px,6px 6px,6px 6px,6px 6px,
+        6px 6px,6px 6px,6px 6px,6px 6px;
+      background-position:
+        left top,
+        center top,
+        right top,
+        left center,
+        right center,
+        left bottom,
+        center bottom,
+        right bottom,
+        left 2px top 2px,
+        center top 2px,
+        right 2px top 2px,
+        left 2px center,
+        right 2px center,
+        left 2px bottom 2px,
+        center bottom 2px,
+        right 2px bottom 2px;
+    }
+
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .hero-bg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.08));
+      z-index:3;
+    }
+
+    .burger-stack{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      margin:0;
+      display:block;
+      will-change:transform;
+      overflow:hidden;
+    }
+
+    .burger-layer{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:fill;
+      object-position:center center;
+      pointer-events:none;
+      user-select:none;
+      will-change:transform;
+    }
+
+    .burger-layer-back{
+      z-index:1;
+      transition:transform .28s cubic-bezier(.22,1,.36,1);
+      transform:scale(1.015);
+    }
+
+    .burger-layer-front{
+      z-index:2;
+      transition:transform .18s cubic-bezier(.22,1,.36,1);
+      transform:scale(1.005);
+    }
+
+    /* smooth out parallax movement */
+    .portfolio-title{
+      will-change:transform;
+      transition:transform .12s cubic-bezier(.22,1,.36,1);
+    }
+
+    /* separate section below header */
+    .intro-work{
+      background:#4d4d4f;
+      color:var(--white);
+      padding:60px 0 110px;
+      border-top:1px solid rgba(255,255,255,.13);
+    }
+
+    .section-label{
+      font-size:.82rem;
+      font-weight:600;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.72);
+      margin-bottom:24px;
+    }
+
+    /* full-bleed half-screen layout */
+    .featured-grid{
+      display:grid;
+      grid-template-columns:50vw 1fr;
+      gap:0 60px;
+      align-items:center;
+      /* break left edge out to viewport */
+      margin-left:calc((100% - 100vw) / 2);
+      width:100vw;
+    }
+
+    .phone-wrap{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      padding:0;
+      height:100%;
+    }
+
+    .phone-video{
+      width:100%;
+      max-width:none;
+      height:auto;
+      border-radius:0;
+      object-fit:contain;
+      box-shadow:none;
+      animation:phoneFloat 6s ease-in-out infinite;
+      transform-origin:center center;
+    }
+
+    @keyframes phoneFloat{
+      0%,100%{ transform:translateY(0px); }
+      50%    { transform:translateY(-14px); }
+    }
+
+    .featured-copy{
+      padding-right:clamp(24px, 4vw, 80px);
+    }
+
+    .featured-copy h2{
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+      margin-bottom:20px;
+      max-width:12ch;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.06),
+        0 2px 6px rgba(0,0,0,.5),
+        0 8px 24px rgba(0,0,0,.35),
+        0 20px 50px rgba(0,0,0,.2);
+    }
+
+    .featured-copy p.lead{
+      max-width:62ch;
+      color:var(--muted-light);
+      margin-bottom:28px;
+      font-size:1rem;
+    }
+
+    .info-columns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px 28px;
+      margin-bottom:30px;
+    }
+
+    .info-box h3{
+      font-size:1.05rem;
+      margin-bottom:10px;
+      color:#fff;
+      text-shadow:0 1px 4px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.25);
+    }
+
+    .info-box p,
+    .info-box ul{
+      font-size:.96rem;
+      color:var(--muted-light);
+    }
+
+    .info-box ul{
+      padding-left:18px;
+    }
+
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+      margin-top:10px;
+    }
+
+    .metric{
+      padding:16px;
+      border:1px solid var(--line-light);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+    }
+
+    .metric strong{
+      display:block;
+      font-size:1.55rem;
+      margin-bottom:6px;
+      color:#fff;
+      text-shadow:0 0 18px rgba(41,169,255,.45), 0 2px 6px rgba(0,0,0,.4);
+    }
+
+    .metric span{
+      font-size:.92rem;
+      color:var(--muted-light);
+    }
+
+    /* gallery row: image left + aside text right */
+    .gallery-row{
+      margin-top:72px;
+      display:grid;
+      grid-template-columns:1.5fr 1fr;
+      gap:56px;
+      align-items:center;
+    }
+
+    .gallery-visual img{
+      width:100%;
+      display:block;
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,.55)) drop-shadow(0 6px 18px rgba(0,0,0,.4));
+    }
+
+    .gallery-aside{
+      color:var(--text-light);
+    }
+
+    .gallery-aside h3{
+      font-size:1.35rem;
+      font-weight:600;
+      margin-bottom:14px;
+      color:#fff;
+      text-shadow:0 1px 4px rgba(0,0,0,.4);
+    }
+
+    .gallery-aside p{
+      font-size:.97rem;
+      color:rgba(255,255,255,.68);
+      line-height:1.7;
+      margin-bottom:24px;
+    }
+
+    .aside-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:28px;
+    }
+
+    .aside-tags span{
+      font-size:.78rem;
+      font-weight:500;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      padding:5px 12px;
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:999px;
+      color:rgba(255,255,255,.6);
+    }
+
+    .aside-stat{
+      padding-top:24px;
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    .aside-stat strong{
+      display:block;
+      font-size:2.4rem;
+      font-weight:700;
+      color:#fff;
+      text-shadow:0 0 20px rgba(41,169,255,.4);
+      line-height:1;
+      margin-bottom:6px;
+    }
+
+    .aside-stat span{
+      font-size:.9rem;
+      color:rgba(255,255,255,.55);
+    }
+
+    /* keep old single-gallery for fallback */
+    .single-gallery{
+      margin-top:64px;
+    }
+
+    .single-gallery img{
+      width:100%;
+      max-width:100%;
+      border-radius:0;
+      display:block;
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,.6)) drop-shadow(0 8px 20px rgba(0,0,0,.4));
+    }
+
+    /* ── fade-up animation ── */
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(36px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+
+    .fade-up{
+      opacity:0;
+      transform:translateY(36px);
+      transition:opacity .75s cubic-bezier(.22,1,.36,1) var(--delay,0s),
+                 transform .75s cubic-bezier(.22,1,.36,1) var(--delay,0s);
+    }
+
+    .fade-up.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* second section */
+    .case-light{
+      background:#ffffff;
+      padding:90px 0 100px;
+    }
+
+    .tiskly-logo{
+      max-height:80px;
+      width:auto;
+      margin-bottom:14px;
+    }
+
+    .case-top-label{
+      font-size:.9rem;
+      color:#6f6f6f;
+      margin-bottom:18px;
+    }
+
+    .case-title{
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.1;
+      letter-spacing:-.03em;
+      margin-bottom:34px;
+      max-width:14ch;
+    }
+
+    .case-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:42px;
+      align-items:start;
+      background:#f4f4f4;
+      border:1px solid rgba(0,0,0,.05);
+      border-radius:32px;
+      padding:36px;
+    }
+
+    .case-copy p{
+      color:var(--muted-dark);
+      margin-bottom:18px;
+      max-width:62ch;
+    }
+
+    .case-info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .case-card{
+      background:#ffffff;
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:20px;
+      padding:18px;
+    }
+
+    .case-card h4{
+      margin-bottom:10px;
+      font-size:1rem;
+    }
+
+    .case-card p,
+    .case-card ul{
+      color:var(--muted-dark);
+      font-size:.95rem;
+    }
+
+    .case-card ul{
+      padding-left:18px;
+    }
+
+    .visual-stack{
+      display:grid;
+      gap:18px;
+    }
+
+    .visual-stack img{
+      border-radius:0;
+      border:none;
+      background:transparent;
+      box-shadow:none;
+      filter:drop-shadow(0 20px 50px rgba(0,0,0,.3));
+    }
+
+    .visual-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .footer{
+      background:var(--bg-light);
+      border-top:1px solid rgba(0,0,0,.08);
+      padding:28px 0 42px;
+    }
+
+    .footer-inner{
+      width:min(calc(100% - 48px), var(--max-width));
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      color:#666;
+      font-size:.94rem;
+    }
+
+    @media (max-width: 1100px){
+      .featured-grid{
+        grid-template-columns:1fr;
+        margin-left:0;
+        width:100%;
+      }
+
+      .phone-wrap{
+        justify-content:center;
+        max-height:70vw;
+        overflow:hidden;
+      }
+
+      .case-grid{
+        grid-template-columns:1fr;
+      }
+
+      .featured-copy h2{
+        max-width:none;
+      }
+
+      .case-title{
+        max-width:none;
+      }
+    }
+
+    @media (max-width: 760px){
+      .site-nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .site-menu{
+        gap:16px;
+        flex-wrap:wrap;
+      }
+
+      .hero-header{
+        min-height:100svh;
+        min-height:100vh;
+      }
+
+      .gallery-row{
+        grid-template-columns:1fr;
+        gap:32px;
+      }
+
+      .hero-header-inner{
+        padding:108px 20px 48px;
+      }
+
+      .intro-work{
+        padding:40px 0 80px;
+      }
+
+      .featured-grid{
+        margin-left:0;
+        width:100%;
+      }
+
+      .info-columns,
+      .metrics,
+      .case-info-grid,
+      .visual-row{
+        grid-template-columns:1fr;
+      }
+
+      .case-light{
+        padding:70px 0 80px;
+      }
+
+      .case-grid{
+        padding:22px;
+      }
+
+      .footer-inner{
+        flex-direction:column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <div class="site-brand">Matija Moharić</div>
+      <nav class="site-menu">
+        <a href="#work">Work</a>
+        <a href="#branding">Branding</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-header">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="burger-stack">
+        <img class="burger-layer burger-layer-back" src="images/BG2.png" alt="">
+        <img class="burger-layer burger-layer-front" src="images/BG1.png" alt="">
+      </div>
+    </div>
+
+    <div class="hero-header-inner">
+      <div class="portfolio-block">
+        <h1 class="portfolio-title">Portfolio</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-work" id="work">
+
+    <!-- label stays inside normal container -->
+    <div class="container">
+      <div class="section-label fade-up">UX/UI</div>
+    </div>
+
+    <!-- grid breaks edge-to-edge: left half = video, right half = text -->
+    <div class="featured-grid">
+      <div class="phone-wrap fade-up">
+        <video class="phone-video" autoplay muted loop playsinline preload="auto">
+          <source src="images/Video1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="featured-copy">
+        <h2 class="fade-up">EcoTrip — Designing a sustainable travel experience</h2>
+
+        <p class="lead fade-up">
+          EcoTrip is a mobile travel concept focused on helping users discover and book more sustainable trips through a clearer, faster, and more intuitive experience.
+        </p>
+
+        <div class="info-columns">
+          <div class="info-box fade-up" style="--delay:.1s">
+            <h3>Overview</h3>
+            <p>
+              The goal was to create a travel experience that feels simple to use while making eco-conscious decisions more visible and easier to understand.
+            </p>
+          </div>
+
+          <div class="info-box fade-up" style="--delay:.2s">
+            <h3>Problem</h3>
+            <p>
+              Users often face too many generic travel choices, limited sustainability clarity, and slow decision-making during booking.
+            </p>
+          </div>
+
+          <div class="info-box fade-up" style="--delay:.3s">
+            <h3>Solution</h3>
+            <ul>
+              <li>Personalized travel recommendations</li>
+              <li>Clear visibility of eco-friendly options</li>
+              <li>Simple mobile-first booking flow</li>
+            </ul>
+          </div>
+
+          <div class="info-box fade-up" style="--delay:.4s">
+            <h3>Design Approach</h3>
+            <ul>
+              <li>Reduced cognitive load through clearer structure</li>
+              <li>Higher visual clarity for key user actions</li>
+              <li>Improved scanning and faster comparison</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric fade-up" style="--delay:.1s">
+            <strong>35%</strong>
+            <span>Faster booking flow</span>
+          </div>
+          <div class="metric fade-up" style="--delay:.2s">
+            <strong>50%</strong>
+            <span>Better visibility of eco options</span>
+          </div>
+          <div class="metric fade-up" style="--delay:.3s">
+            <strong>25%</strong>
+            <span>Higher onboarding completion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- gallery: image + aside text -->
+    <div class="container">
+      <div class="gallery-row fade-up">
+        <div class="gallery-visual">
+          <img src="images/Image2.png" alt="EcoTrip app screens overview">
+        </div>
+        <div class="gallery-aside">
+          <h3>Reflection</h3>
+          <p>Designed the full user flow from scratch — improving consistency across every screen. The focus was entirely on usability, clarity, and making sustainable choices feel natural rather than forced.</p>
+          <div class="aside-tags">
+            <span>User Testing</span>
+            <span>Accessibility</span>
+            <span>Motion</span>
+            <span>iOS Design</span>
+          </div>
+          <div class="aside-stat">
+            <strong>+40%</strong>
+            <span>Increase in user engagement through personalization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="case-light" id="branding">
+    <div class="container">
+      <div class="case-top-label">UX/UI + Branding</div>
+      <img src="images/Image4.svg" alt="Tiskly logo" class="tiskly-logo">
+      <h2 class="case-title">Tiskly — 3D packaging design experience</h2>
+
+      <div class="case-grid">
+        <div class="case-copy">
+          <p>
+            Tiskly is a web platform concept that allows users to upload and preview their designs directly on 3D packaging models before production.
+          </p>
+
+          <p>
+            The project focused on making the design-to-print process feel more visual, more intuitive, and less error-prone for users who need confidence before placing an order.
+          </p>
+
+          <div class="case-info-grid">
+            <div class="case-card">
+              <h4>Problem</h4>
+              <ul>
+                <li>Designing packaging required switching between different tools</li>
+                <li>It was difficult to imagine how flat design would look in 3D</li>
+                <li>Limited preview increased the risk of mistakes</li>
+              </ul>
+            </div>
+
+            <div class="case-card">
+              <h4>Solution</h4>
+              <ul>
+                <li>Real-time 3D preview of applied artwork</li>
+                <li>Simple upload and placement workflow</li>
+                <li>Clear positioning controls and product details</li>
+              </ul>
+            </div>
+
+            <div class="case-card">
+              <h4>Design Approach</h4>
+              <p>
+                A practical, clarity-first interface with minimal distractions, immediate visual feedback, and a layout that feels familiar and modern.
+              </p>
+            </div>
+
+            <div class="case-card">
+              <h4>Outcome</h4>
+              <p>
+                A smoother validation process, fewer surprises before production, and a stronger connection between concept, preview, and final product order.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-stack">
+          <img src="images/Image5.svg" alt="Tiskly interface">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div>© 2025 Matija Moharić — UX/UI Designer</div>
+      <div>Available for freelance and digital product work.</div>
+    </div>
+  </footer>
+
+
+  <script>
+    // ── scroll fade-up ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── hero mouse parallax ──
+    const heroEl     = document.querySelector('.hero-header');
+    const titleEl    = document.querySelector('.portfolio-title');
+    const burgerBack = document.querySelector('.burger-layer-back');
+    const burgerFront= document.querySelector('.burger-layer-front');
+
+    if (heroEl) {
+      document.addEventListener('mousemove', (e) => {
+        const cx = window.innerWidth  / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;   // –1 → +1
+        const dy = (e.clientY - cy) / cy;
+
+        if (titleEl) {
+          titleEl.style.transform = `translate(${dx * -10}px, ${dy * -6}px)`;
+        }
+
+        if (burgerBack) {
+          burgerBack.style.transform = `translate(${dx * 10}px, ${dy * 8}px)`;
+        }
+
+        if (burgerFront) {
+          burgerFront.style.transform = `translate(${dx * -7}px, ${dy * 5}px)`;
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
