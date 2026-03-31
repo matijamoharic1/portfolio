@@ -10,7 +10,7 @@
 
   <style>
     :root{
-      --bg-dark:#434345;
+      --bg-dark:#4d4d4f;
       --bg-light:#f4f4f4;
       --white:#ffffff;
       --text-light:#f1f1f1;
@@ -60,10 +60,10 @@
 
     /* top nav */
     .site-nav{
-      background:var(--bg-dark);
-      color:var(--white);
+      background:#ffffff;
+      color:#4d4d4f;
       padding:22px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(0,0,0,.08);
     }
 
     .site-nav-inner{
@@ -76,45 +76,62 @@
     }
 
     .site-brand{
-      font-size:1rem;
-      font-weight:600;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.92);
+      font-family:"Cormorant Garamond", serif;
+      font-size:1.25rem;
+      font-weight:500;
+      letter-spacing:.03em;
+      color:#4d4d4f;
     }
 
     .site-menu{
       display:flex;
-      gap:24px;
-      font-size:.95rem;
-      color:rgba(255,255,255,.76);
+      gap:6px;
+      align-items:center;
+    }
+
+    .site-menu a{
+      font-size:.8rem;
+      font-weight:500;
+      letter-spacing:.04em;
+      color:#666;
+      padding:7px 16px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:background .2s ease, color .2s ease, border-color .2s ease;
     }
 
     .site-menu a:hover{
-      color:#fff;
+      background:#f4f4f4;
+      color:#1a1a1a;
+      border-color:rgba(0,0,0,.08);
     }
 
     /* hero header block */
     .hero-header{
-      background:var(--bg-dark);
+      background:#4d4d4f;
       color:var(--text-light);
-      padding:72px 0 40px;
+      padding:0;
+      min-height:80vh;
+      display:flex;
+      align-items:center;
     }
 
     .hero-header-inner{
       position:relative;
-      min-height:300px;
+      width:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
+      padding:72px 0 56px;
     }
 
     .portfolio-block{
-      max-width:760px;
+      max-width:820px;
       position:relative;
       display:flex;
       flex-direction:column;
       align-items:center;
+      gap:0;
     }
 
     .portfolio-title{
@@ -185,39 +202,48 @@
         right 2px bottom 2px;
     }
 
-    .signature-line{
-      width:360px;
-      max-width:70%;
-      margin:18px 0 10px 28px;
-      opacity:.92;
+    .burger-stack{
+      position:relative;
+      width:min(460px, 56vw);
+      aspect-ratio: 460 / 180;
+      margin:-4px auto 0;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      will-change:transform;
     }
 
-    .name-badge{
-      width:max-content;
-      max-width:100%;
-      margin-left:0;
-      padding:16px 28px;
-      border:2px solid var(--yellow);
-      border-radius:999px;
-      transform:rotate(-5deg);
-      color:#ededed;
-      box-shadow:inset 0 0 0 2px rgba(228,195,0,.25);
+    .burger-layer{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center top;
+      pointer-events:none;
+      user-select:none;
+      will-change:transform;
     }
 
-    .name-badge strong{
-      display:block;
-      font-size:1.05rem;
-      font-weight:600;
+    .burger-layer-back{
+      z-index:1;
+      transition:transform .22s cubic-bezier(.22,1,.36,1);
     }
 
-    .name-badge span{
-      font-size:1rem;
-      color:rgba(255,255,255,.82);
+    .burger-layer-front{
+      z-index:2;
+      transition:transform .16s cubic-bezier(.22,1,.36,1);
+    }
+
+    /* smooth out parallax movement */
+    .portfolio-title{
+      will-change:transform;
+      transition:transform .12s cubic-bezier(.22,1,.36,1);
     }
 
     /* separate section below header */
     .intro-work{
-      background:var(--bg-dark);
+      background:#4d4d4f;
       color:var(--white);
       padding:60px 0 110px;
       border-top:1px solid rgba(255,255,255,.13);
@@ -260,8 +286,6 @@
       border-radius:0;
       object-fit:contain;
       box-shadow:none;
-      /* dissolve the black phone-frame background into the page */
-      mix-blend-mode:screen;
       animation:phoneFloat 6s ease-in-out infinite;
       transform-origin:center center;
     }
@@ -346,6 +370,79 @@
       color:var(--muted-light);
     }
 
+    /* gallery row: image left + aside text right */
+    .gallery-row{
+      margin-top:72px;
+      display:grid;
+      grid-template-columns:1.5fr 1fr;
+      gap:56px;
+      align-items:center;
+    }
+
+    .gallery-visual img{
+      width:100%;
+      display:block;
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,.55)) drop-shadow(0 6px 18px rgba(0,0,0,.4));
+    }
+
+    .gallery-aside{
+      color:var(--text-light);
+    }
+
+    .gallery-aside h3{
+      font-size:1.35rem;
+      font-weight:600;
+      margin-bottom:14px;
+      color:#fff;
+      text-shadow:0 1px 4px rgba(0,0,0,.4);
+    }
+
+    .gallery-aside p{
+      font-size:.97rem;
+      color:rgba(255,255,255,.68);
+      line-height:1.7;
+      margin-bottom:24px;
+    }
+
+    .aside-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:28px;
+    }
+
+    .aside-tags span{
+      font-size:.78rem;
+      font-weight:500;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      padding:5px 12px;
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:999px;
+      color:rgba(255,255,255,.6);
+    }
+
+    .aside-stat{
+      padding-top:24px;
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    .aside-stat strong{
+      display:block;
+      font-size:2.4rem;
+      font-weight:700;
+      color:#fff;
+      text-shadow:0 0 20px rgba(41,169,255,.4);
+      line-height:1;
+      margin-bottom:6px;
+    }
+
+    .aside-stat span{
+      font-size:.9rem;
+      color:rgba(255,255,255,.55);
+    }
+
+    /* keep old single-gallery for fallback */
     .single-gallery{
       margin-top:64px;
     }
@@ -378,7 +475,7 @@
 
     /* second section */
     .case-light{
-      background:var(--bg-light);
+      background:#ffffff;
       padding:90px 0 100px;
     }
 
@@ -407,8 +504,8 @@
       grid-template-columns:1.05fr .95fr;
       gap:42px;
       align-items:start;
-      background:#fff;
-      border:1px solid var(--line-dark);
+      background:#f4f4f4;
+      border:1px solid rgba(0,0,0,.05);
       border-radius:32px;
       padding:36px;
     }
@@ -427,7 +524,7 @@
     }
 
     .case-card{
-      background:#fafafa;
+      background:#ffffff;
       border:1px solid rgba(0,0,0,.06);
       border-radius:20px;
       padding:18px;
@@ -521,16 +618,17 @@
       }
 
       .hero-header{
-        padding:44px 0 24px;
+        min-height:60vh;
       }
 
-      .signature-line{
-        margin-left:10px;
-        width:220px;
+      .gallery-row{
+        grid-template-columns:1fr;
+        gap:32px;
       }
 
-      .name-badge{
-        padding:14px 20px;
+      .burger-stack{
+        width:min(320px, 78vw);
+        margin-top:2px;
       }
 
       .intro-work{
@@ -581,11 +679,9 @@
       <div class="portfolio-block">
         <h1 class="portfolio-title">Portfolio</h1>
 
-        <img class="signature-line" src="images/Image3.svg" alt="">
-
-        <div class="name-badge">
-          <strong>Matija Moharić</strong>
-          <span>UX/UI Designer</span>
+        <div class="burger-stack" aria-label="Decorative hero graphics">
+          <img class="burger-layer burger-layer-back" src="images/BG2.png" alt="">
+          <img class="burger-layer burger-layer-front" src="images/BG1.png" alt="">
         </div>
       </div>
     </div>
@@ -665,10 +761,26 @@
       </div>
     </div>
 
-    <!-- gallery back inside container -->
+    <!-- gallery: image + aside text -->
     <div class="container">
-      <div class="single-gallery fade-up">
-        <img src="images/Image2.png" alt="EcoTrip app screens overview">
+      <div class="gallery-row fade-up">
+        <div class="gallery-visual">
+          <img src="images/Image2.png" alt="EcoTrip app screens overview">
+        </div>
+        <div class="gallery-aside">
+          <h3>Reflection</h3>
+          <p>Designed the full user flow from scratch — improving consistency across every screen. The focus was entirely on usability, clarity, and making sustainable choices feel natural rather than forced.</p>
+          <div class="aside-tags">
+            <span>User Testing</span>
+            <span>Accessibility</span>
+            <span>Motion</span>
+            <span>iOS Design</span>
+          </div>
+          <div class="aside-stat">
+            <strong>+40%</strong>
+            <span>Increase in user engagement through personalization</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -741,6 +853,7 @@
 
 
   <script>
+    // ── scroll fade-up ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -749,8 +862,34 @@
         }
       });
     }, { threshold: 0.12 });
-
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── hero mouse parallax ──
+    const heroEl     = document.querySelector('.hero-header');
+    const titleEl    = document.querySelector('.portfolio-title');
+    const burgerBack = document.querySelector('.burger-layer-back');
+    const burgerFront= document.querySelector('.burger-layer-front');
+
+    if (heroEl) {
+      document.addEventListener('mousemove', (e) => {
+        const cx = window.innerWidth  / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;   // –1 → +1
+        const dy = (e.clientY - cy) / cy;
+
+        if (titleEl) {
+          titleEl.style.transform = `translate(${dx * -10}px, ${dy * -6}px)`;
+        }
+
+        if (burgerBack) {
+          burgerBack.style.transform = `translate(${dx * 10}px, ${dy * 8}px)`;
+        }
+
+        if (burgerFront) {
+          burgerFront.style.transform = `translate(${dx * -7}px, ${dy * 5}px)`;
+        }
+      });
+    }
   </script>
 
 </body>
