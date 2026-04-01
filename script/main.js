@@ -35,90 +35,121 @@ if (heroEl) {
 }
 
 
-/* ── Der Komponist Gin — 3D reveal on hover / touch ── */
+/* ── Der Komponist Gin — X-ray scanner on hover / touch ── */
 (function () {
   const reveal = document.querySelector('.gin-image-reveal');
   if (!reveal) return;
 
-  const topImg = reveal.querySelector('.gin-img-top');
+  const topImg  = reveal.querySelector('.gin-img-top');
+  const ring    = reveal.querySelector('.gin-xray-ring');
   if (!topImg) return;
 
-  /* ----- animation state ----- */
-  let rafId       = null;
-  let progress    = 1;     // 1 = fully covered (final render), 0 = fully revealed (3D)
-  let targetProg  = 1;
-  let isActive    = false; // true while hovering/touching
+  /* radius of the x-ray circle in px */
+  const RADIUS     = 80;
+  const SOFT_EDGE  = 18;   /* feathering width */
 
-  /* looping wipe: oscillates between 0.08 and 0 while active */
-  let loopDir     = -1;    // -1 shrinks remaining cover, +1 grows it back slightly
-  let loopMin     = 0;     // how far the loop goes (fully revealed)
-  let loopMax     = 0.12;  // subtle bounce-back amount
+  /* current and target cursor position (for smooth ring follow) */
+  let curX = -999, curY = -999;
+  let tgtX = -999, tgtY = -999;
+  let rafId = null;
+  let active = false;
 
-  function applyClip(p) {
-    /* p = 1 → fully covered (slide from bottom: inset from 0% bottom)
-       p = 0 → fully revealed */
-    const pct = (p * 100).toFixed(2);
-    topImg.style.clipPath = `inset(0 0 ${100 - pct}% 0)`;
+  function buildMask(x, y, r) {
+    const inner = Math.max(0, r - SOFT_EDGE);
+    return `radial-gradient(circle ${r}px at ${x}px ${y}px,
+      transparent ${inner}px,
+      black ${r}px)`;
   }
 
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
+  function applyMask(x, y, r) {
+    const m = buildMask(x, y, r);
+    topImg.style.webkitMaskImage = m;
+    topImg.style.maskImage       = m;
   }
 
-  function animate() {
-    if (isActive) {
-      /* first bring progress down to 0 quickly, then loop slightly */
-      if (progress > loopMin + 0.005) {
-        progress = lerp(progress, loopMin, 0.085);
-      } else {
-        /* micro-loop: oscillate ±loopMax around 0 to suggest "pulsing through" */
-        progress += loopDir * 0.004;
-        if (progress <= loopMin)           { progress = loopMin;  loopDir =  1; }
-        if (progress >= loopMax)           { progress = loopMax;  loopDir = -1; }
-      }
-    } else {
-      /* ease back to fully covered */
-      progress = lerp(progress, 1, 0.07);
-      if (progress > 0.999) { progress = 1; cancelAnimationFrame(rafId); rafId = null; applyClip(1); return; }
+  function clearMask() {
+    /* fully opaque = branded image covers everything */
+    topImg.style.webkitMaskImage = '';
+    topImg.style.maskImage       = '';
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    if (!active) { rafId = null; return; }
+
+    /* smooth follow */
+    curX = lerp(curX, tgtX, 0.14);
+    curY = lerp(curY, tgtY, 0.14);
+
+    /* update x-ray hole */
+    applyMask(curX, curY, RADIUS);
+
+    /* move the glowing ring to match */
+    if (ring) {
+      ring.style.left = curX + 'px';
+      ring.style.top  = curY + 'px';
     }
 
-    applyClip(progress);
-    rafId = requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(tick);
   }
 
-  function startReveal() {
-    if (isActive) return;
-    isActive = true;
-    loopDir  = -1;
-    if (!rafId) rafId = requestAnimationFrame(animate);
-  }
+  /* ── mouse ── */
+  reveal.addEventListener('mouseenter', () => {
+    active = true;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  });
 
-  function endReveal() {
-    if (!isActive) return;
-    isActive = false;
-    if (!rafId) rafId = requestAnimationFrame(animate);
-  }
+  reveal.addEventListener('mousemove', (e) => {
+    const rect = reveal.getBoundingClientRect();
+    tgtX = e.clientX - rect.left;
+    tgtY = e.clientY - rect.top;
 
-  /* mouse */
-  reveal.addEventListener('mouseenter', startReveal);
-  reveal.addEventListener('mouseleave', endReveal);
+    /* snap immediately on first entry so there's no lag from off-screen */
+    if (curX < 0) { curX = tgtX; curY = tgtY; }
+  });
 
-  /* touch */
+  reveal.addEventListener('mouseleave', () => {
+    active = false;
+    clearMask();
+    /* hide ring */
+    if (ring) { ring.style.left = '-999px'; ring.style.top = '-999px'; }
+    /* reset so next entry snaps */
+    curX = -999; curY = -999;
+  });
+
+  /* ── touch (tap + drag) ── */
   reveal.addEventListener('touchstart', (e) => {
     reveal.classList.add('touch-active');
-    startReveal();
+    const t = e.touches[0];
+    const rect = reveal.getBoundingClientRect();
+    tgtX = curX = t.clientX - rect.left;
+    tgtY = curY = t.clientY - rect.top;
+    active = true;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }, { passive: true });
+
+  reveal.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    const rect = reveal.getBoundingClientRect();
+    tgtX = t.clientX - rect.left;
+    tgtY = t.clientY - rect.top;
   }, { passive: true });
 
   reveal.addEventListener('touchend', () => {
     reveal.classList.remove('touch-active');
-    endReveal();
+    active = false;
+    clearMask();
+    curX = -999; curY = -999;
   });
 
   reveal.addEventListener('touchcancel', () => {
     reveal.classList.remove('touch-active');
-    endReveal();
+    active = false;
+    clearMask();
+    curX = -999; curY = -999;
   });
 
-  /* set initial state */
-  applyClip(1);
+  /* initial state: branded image fully visible */
+  clearMask();
 })();
