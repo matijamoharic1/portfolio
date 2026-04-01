@@ -527,41 +527,35 @@ a{ text-decoration:none; color:inherit; }
 .gin-image-reveal{
   position:relative;
   width:100%;
+  aspect-ratio:16 / 9;      /* locked to 16:9 */
   border-radius:20px;
   overflow:hidden;
-  cursor:none;           /* we show our own cursor ring */
+  cursor:none;
   user-select:none;
   -webkit-user-select:none;
   box-shadow:0 40px 100px rgba(0,0,0,.7), 0 0 0 1px rgba(200,160,80,.08);
 }
 
+/* both images fill the 16:9 box */
 .gin-img-base,
 .gin-img-top{
-  display:block;
+  position:absolute;
+  inset:0;
   width:100%;
-  height:auto;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 /* base = clay 3D model (underneath) */
 .gin-img-base{
-  position:relative;
   z-index:1;
-  /* subtle sepia/green tint so it reads like an x-ray */
   filter:contrast(1.1) brightness(.95);
 }
 
 /* top = final branded render (default visible) */
 .gin-img-top{
-  position:absolute;
-  inset:0;
   z-index:2;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  /* mask starts fully opaque (covers everything) */
-  -webkit-mask-image:radial-gradient(circle 0px at 50% 50%, transparent 0%, black 0%);
-  mask-image:radial-gradient(circle 0px at 50% 50%, transparent 0%, black 0%);
-  /* JS will update mask-image on mousemove */
   will-change:mask-image,-webkit-mask-image;
 }
 
@@ -590,11 +584,12 @@ a{ text-decoration:none; color:inherit; }
 }
 
 
-/* ── bottom cards: Approach + Result + PS ── */
+/* ── bottom cards: 3 equal columns ── */
 .gin-bottom-cards{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr 1fr;
   gap:clamp(10px, 1.5vw, 16px);
+  align-items:stretch;   /* equal height */
 }
 
 .gin-card{
@@ -733,7 +728,7 @@ a{ text-decoration:none; color:inherit; }
   .gin-copy{ order:1; }
 
   .gin-bottom-cards{
-    grid-template-columns:1fr 1fr;  /* keep side by side on phablet */
+    grid-template-columns:1fr 1fr 1fr;  /* keep 3-col on phablet */
   }
 
   .case-info-grid{
@@ -781,7 +776,7 @@ a{ text-decoration:none; color:inherit; }
     grid-template-columns:1fr;
   }
 
-  /* stack bottom cards vertically on small phones */
+  /* 3 cards collapse to 1-col on small phones */
   .gin-bottom-cards{
     grid-template-columns:1fr;
   }
