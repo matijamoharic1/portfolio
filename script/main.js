@@ -35,121 +35,128 @@ if (heroEl) {
 }
 
 
-/* ── Der Komponist Gin — X-ray scanner on hover / touch ── */
+/* ── Der Komponist Gin — X-ray scanner ── */
 (function () {
   const reveal = document.querySelector('.gin-image-reveal');
   if (!reveal) return;
 
-  const topImg  = reveal.querySelector('.gin-img-top');
-  const ring    = reveal.querySelector('.gin-xray-ring');
+  const topImg = reveal.querySelector('.gin-img-top');
+  const ring   = reveal.querySelector('.gin-xray-ring');
   if (!topImg) return;
 
-  /* radius of the x-ray circle in px */
-  const RADIUS     = 80;
-  const SOFT_EDGE  = 18;   /* feathering width */
+  const RADIUS = 90;    /* x-ray circle radius px          */
+  const FEATHER = 20;   /* soft edge width px               */
 
-  /* current and target cursor position (for smooth ring follow) */
-  let curX = -999, curY = -999;
-  let tgtX = -999, tgtY = -999;
   let rafId = null;
   let active = false;
 
-  function buildMask(x, y, r) {
-    const inner = Math.max(0, r - SOFT_EDGE);
-    return `radial-gradient(circle ${r}px at ${x}px ${y}px,
-      transparent ${inner}px,
-      black ${r}px)`;
-  }
-
-  function applyMask(x, y, r) {
-    const m = buildMask(x, y, r);
-    topImg.style.webkitMaskImage = m;
-    topImg.style.maskImage       = m;
-  }
-
-  function clearMask() {
-    /* fully opaque = branded image covers everything */
-    topImg.style.webkitMaskImage = '';
-    topImg.style.maskImage       = '';
-  }
+  /* cursor target (set on mousemove / touchmove) */
+  let tgtX = 0, tgtY = 0;
+  /* smoothed position (lerped toward target) */
+  let curX = 0, curY = 0;
+  /* whether we have a real position yet */
+  let hasPos = false;
 
   function lerp(a, b, t) { return a + (b - a) * t; }
+
+  /* Apply a circular hole in the top image at (x, y).
+     Outside the hole  → top image FULLY OPAQUE  (branded render visible)
+     Inside the hole   → top image TRANSPARENT   (3D model shows through)
+     Nothing about the base image changes — it just shows through the hole. */
+  function setHole(x, y) {
+    const inner = RADIUS - FEATHER;
+    const mask  = `radial-gradient(circle at ${x}px ${y}px,
+      transparent ${inner}px,
+      black ${RADIUS}px)`;
+    topImg.style.webkitMaskImage = mask;
+    topImg.style.maskImage       = mask;
+  }
+
+  /* Remove the hole — top image covers everything again */
+  function removeHole() {
+    topImg.style.webkitMaskImage = 'none';
+    topImg.style.maskImage       = 'none';
+  }
+
+  function moveRing(x, y) {
+    if (!ring) return;
+    ring.style.left = x + 'px';
+    ring.style.top  = y + 'px';
+  }
 
   function tick() {
     if (!active) { rafId = null; return; }
 
-    /* smooth follow */
-    curX = lerp(curX, tgtX, 0.14);
-    curY = lerp(curY, tgtY, 0.14);
-
-    /* update x-ray hole */
-    applyMask(curX, curY, RADIUS);
-
-    /* move the glowing ring to match */
-    if (ring) {
-      ring.style.left = curX + 'px';
-      ring.style.top  = curY + 'px';
+    if (hasPos) {
+      curX = lerp(curX, tgtX, 0.16);
+      curY = lerp(curY, tgtY, 0.16);
+      setHole(curX, curY);
+      moveRing(curX, curY);
     }
 
     rafId = requestAnimationFrame(tick);
   }
 
-  /* ── mouse ── */
-  reveal.addEventListener('mouseenter', () => {
-    active = true;
-    if (!rafId) rafId = requestAnimationFrame(tick);
-  });
-
-  reveal.addEventListener('mousemove', (e) => {
+  function getPos(e) {
     const rect = reveal.getBoundingClientRect();
-    tgtX = e.clientX - rect.left;
-    tgtY = e.clientY - rect.top;
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+  }
 
-    /* snap immediately on first entry so there's no lag from off-screen */
-    if (curX < 0) { curX = tgtX; curY = tgtY; }
+  /* ── Mouse ── */
+  reveal.addEventListener('mousemove', (e) => {
+    const p = getPos(e);
+    tgtX = p.x; tgtY = p.y;
+
+    if (!hasPos) {
+      /* snap on first move so there's no drift from corner */
+      curX = tgtX; curY = tgtY;
+      hasPos = true;
+    }
+
+    if (!active) {
+      active = true;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }
   });
 
   reveal.addEventListener('mouseleave', () => {
-    active = false;
-    clearMask();
-    /* hide ring */
+    active  = false;
+    hasPos  = false;
+    removeHole();
     if (ring) { ring.style.left = '-999px'; ring.style.top = '-999px'; }
-    /* reset so next entry snaps */
-    curX = -999; curY = -999;
   });
 
-  /* ── touch (tap + drag) ── */
+  /* ── Touch ── */
+  function touchPos(e) {
+    const t    = e.touches[0];
+    const rect = reveal.getBoundingClientRect();
+    return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+  }
+
   reveal.addEventListener('touchstart', (e) => {
     reveal.classList.add('touch-active');
-    const t = e.touches[0];
-    const rect = reveal.getBoundingClientRect();
-    tgtX = curX = t.clientX - rect.left;
-    tgtY = curY = t.clientY - rect.top;
-    active = true;
+    const p = touchPos(e);
+    tgtX = curX = p.x; tgtY = curY = p.y;
+    hasPos = true; active = true;
     if (!rafId) rafId = requestAnimationFrame(tick);
   }, { passive: true });
 
   reveal.addEventListener('touchmove', (e) => {
-    const t = e.touches[0];
-    const rect = reveal.getBoundingClientRect();
-    tgtX = t.clientX - rect.left;
-    tgtY = t.clientY - rect.top;
+    const p = touchPos(e);
+    tgtX = p.x; tgtY = p.y;
   }, { passive: true });
 
-  reveal.addEventListener('touchend', () => {
+  function endTouch() {
     reveal.classList.remove('touch-active');
-    active = false;
-    clearMask();
-    curX = -999; curY = -999;
-  });
+    active = false; hasPos = false;
+    removeHole();
+  }
+  reveal.addEventListener('touchend',   endTouch);
+  reveal.addEventListener('touchcancel', endTouch);
 
-  reveal.addEventListener('touchcancel', () => {
-    reveal.classList.remove('touch-active');
-    active = false;
-    clearMask();
-    curX = -999; curY = -999;
-  });
-
-  /* initial state: branded image fully visible */
-  clearMask();
+  /* Start with branded image fully covering — no mask, no hole */
+  removeHole();
 })();
