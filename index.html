@@ -258,7 +258,8 @@
       padding:90px 0 110px;
       min-height:100vh;
       display:flex;
-      align-items:center;
+      flex-direction:column;
+      align-items:stretch;
     }
 
     .section-label{
@@ -395,6 +396,217 @@
       width:100%;
       max-width:560px;
       filter:drop-shadow(0 24px 60px rgba(0,0,0,.55));
+    }
+
+    /* ── full-width header row above the 6-cell grid ── */
+    .bento-header{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      padding:18px 60px;
+      border:none;
+    }
+
+    .bento-header .section-label{
+      margin-bottom:0;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+
+    .eco-title{
+      font-size:clamp(1rem,1.8vw,1.5rem);
+      font-weight:600;
+      color:rgba(255,255,255,.85);
+      letter-spacing:-.02em;
+      margin:0;
+      line-height:1.2;
+    }
+
+    /* ── bento grid: 3 top + 3 bottom, full-bleed ── */
+    .bento-grid{
+      display:grid;
+      grid-template-columns:1fr 1.4fr 1fr;
+      grid-template-rows:minmax(460px,auto) minmax(420px,auto);
+      gap:0;
+      width:100%;
+      margin-top:0;
+      padding:0 60px;
+      box-sizing:border-box;
+    }
+
+    /* shared cell base — transparent, sits on section bg */
+    .bento-cell{
+      overflow:visible;
+      position:relative;
+    }
+
+    /* cell 1: video — col 1, row 1 */
+    .bento-video{
+      grid-column:1;
+      grid-row:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .bento-video video{
+      width:75%;
+      max-width:320px;
+      border-radius:28px;
+      animation:phoneFloat 6s ease-in-out infinite;
+      box-shadow:0 20px 60px rgba(0,0,0,.55);
+    }
+
+    /* cell 2: info text — col 2, row 1 */
+    .bento-info{
+      grid-column:2;
+      grid-row:1;
+      padding:36px 40px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .bento-info-sections{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:20px 0;
+    }
+
+    .bento-section h4{
+      font-family:"Inter", sans-serif;
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      margin-bottom:7px;
+    }
+
+    .bento-section p,
+    .bento-section ul{
+      font-family:"Inter", sans-serif;
+      font-size:.9rem;
+      color:rgba(255,255,255,.7);
+      line-height:1.65;
+    }
+
+    .bento-section ul{ padding-left:14px; }
+
+    /* cell 3: flowchart — col 3, row 1 */
+    .bento-flow{
+      grid-column:3;
+      grid-row:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px 16px;
+      overflow:hidden;
+    }
+
+    .bento-flow img{
+      width:100%;
+      height:100%;
+      max-height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    /* cell 4: design / features text — col 1, row 2 */
+    .bento-approach{
+      grid-column:1;
+      grid-row:2;
+      padding:32px 28px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      overflow-y:auto;
+    }
+
+    .bento-approach-block h4{
+      font-family:"Inter", sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      margin-bottom:5px;
+    }
+
+    .bento-approach-block p{
+      font-family:"Inter", sans-serif;
+      font-size:.85rem;
+      color:rgba(255,255,255,.62);
+      line-height:1.6;
+    }
+
+    /* cell 5: screens — col 2, row 2 */
+    .bento-screens{
+      grid-column:2;
+      grid-row:2;
+      overflow:visible;
+    }
+
+    .bento-screens img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* cell 6: future + reflection — col 3, row 2 */
+    .bento-stats{
+      grid-column:3;
+      grid-row:2;
+      padding:32px 28px;
+      display:flex;
+      flex-direction:column;
+      gap:24px;
+    }
+
+    .bento-stat-item{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      padding:6px 0;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+
+    .bento-stat-item:last-child{ border-bottom:none; }
+
+    .bento-stat-item strong{
+      font-size:1.8rem;
+      font-weight:700;
+      color:#fff;
+      line-height:1;
+      white-space:nowrap;
+      text-shadow:0 0 18px rgba(41,169,255,.3);
+    }
+
+    .bento-stat-item span{
+      font-size:.78rem;
+      color:rgba(255,255,255,.48);
+      line-height:1.3;
+    }
+
+    @media(max-width:960px){
+      .bento-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto;
+      }
+      .bento-video    { grid-column:1; grid-row:1; min-height:280px; }
+      .bento-flow     { grid-column:2; grid-row:1; }
+      .bento-info     { grid-column:1/3; grid-row:2; }
+      .bento-approach { grid-column:1; grid-row:3; }
+      .bento-screens  { grid-column:1/3; grid-row:4; min-height:260px; }
+      .bento-stats    { grid-column:2; grid-row:3; }
+    }
+
+    @media(max-width:600px){
+      .bento-grid{ grid-template-columns:1fr; }
+      .bento-video,.bento-flow,.bento-info,.bento-approach,
+      .bento-screens,.bento-stats{ grid-column:1; grid-row:auto; min-height:220px; }
     }
 
     /* second section */
@@ -611,93 +823,85 @@
   </section>
 
   <section class="intro-work" id="work">
-    <div class="container">
-      <div class="section-label fade-up">UX/UI</div>
 
-      <div class="eco-layout">
-        <div class="eco-grid">
-          <div class="phone-wrap fade-up">
-            <video class="phone-video" autoplay muted loop playsinline preload="auto">
-              <source src="images/Video1.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+    <!-- div 1: full-width header stretching edge to edge -->
+    <div class="bento-header fade-up">
+      <span class="section-label" style="margin-bottom:0">UX/UI</span>
+      <h2 class="eco-title">EcoTrip — Designing a sustainable travel experience</h2>
+    </div>
+
+    <!-- divs 2–7: the 6-cell grid -->
+    <div class="bento-grid fade-up">
+
+      <!-- cell 1: video — col 1, row 1 -->
+      <div class="bento-cell bento-video">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="images/Video1.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <!-- cell 2: info — col 2, row 1 -->
+      <div class="bento-cell bento-info">
+        <div class="bento-info-sections">
+          <div class="bento-section">
+            <h4>Task</h4>
+            <p>The goal of this project was to redesign a travel app experience in a way that feels modern, polished, and more alive. The client wanted to avoid anything that felt childish or overly playful, and instead focus on a cleaner interface with subtle animation and a stronger sense of how the product would actually work in real use.</p>
           </div>
-
-          <div class="featured-copy">
-            <h2 class="fade-up">EcoTrip — Designing a Clearer Travel Experience</h2>
-
-            <p class="lead fade-up">
-              A mobile travel concept focused on simplifying decision-making through clearer structure, better prioritization, and more accessible eco-friendly options.
-            </p>
-
-            <div class="eco-text-block fade-up" style="--delay:.05s">
-              <h3>Problem</h3>
-              <ul>
-                <li>Travel platforms often present too many choices at once</li>
-                <li>Sustainable options are difficult to identify and compare</li>
-                <li>The booking experience can feel fragmented and slow</li>
-              </ul>
-            </div>
-
-            <div class="eco-text-block fade-up" style="--delay:.1s">
-              <h3>Approach</h3>
-              <ul>
-                <li>Simplified hierarchy to reduce visual noise</li>
-                <li>Focused user flows that support faster decisions</li>
-                <li>Stronger emphasis on key actions and useful information</li>
-              </ul>
-            </div>
-
-            <div class="eco-text-block fade-up" style="--delay:.15s">
-              <h3>Solution</h3>
-              <ul>
-                <li>Home screen for quick entry and personalization</li>
-                <li>Main browsing screen for structured discovery</li>
-                <li>Detail page for confident comparison and booking</li>
-              </ul>
-            </div>
-
-            <div class="eco-text-block fade-up" style="--delay:.2s">
-              <h3>Outcome</h3>
-              <p>
-                A more focused travel flow with clearer navigation, improved usability, and a smoother path from discovery to decision.
-              </p>
-            </div>
+          <div class="bento-section">
+            <h4>What I Designed</h4>
+            <p>I focused the concept around three main screens: the opening screen, the main discovery experience, and the booking screen. Rather than designing too many disconnected views, I kept the flow intentionally tight so each screen had a clear role and the overall journey felt easy to follow.</p>
           </div>
-
-          <div class="flowchart-wrap fade-up" style="--delay:.12s">
-            <img class="flowchart" src="images/Flowchart ecotrip.png" alt="EcoTrip user flow">
+          <div class="bento-section">
+            <h4>Approach</h4>
+            <p>I built the redesign around clarity, structure, and motion. The visual direction uses strong imagery, clean typography, and simple layout decisions to make the interface feel closer to a contemporary mobile product. Animation was considered as part of the experience so the screens would not only look better, but also feel more natural and interactive.</p>
           </div>
-        </div>
-
-        <div class="eco-bottom">
-          <div class="eco-insights">
-            <div class="eco-insight fade-up" style="--delay:.05s">
-              <h3>Design Focus</h3>
-              <p>Simplicity, clarity, and a visual structure that helps users move through the experience with less effort.</p>
-            </div>
-
-            <div class="eco-insight fade-up" style="--delay:.1s">
-              <h3>Key Features</h3>
-              <p>Personalized entry points, structured listings, and an intuitive screen-to-screen journey built for mobile use.</p>
-            </div>
-
-            <div class="eco-insight fade-up" style="--delay:.15s">
-              <h3>Sustainability</h3>
-              <p>Eco-friendly choices are surfaced more clearly, making responsible decisions easier to notice and understand.</p>
-            </div>
-
-            <div class="eco-insight fade-up" style="--delay:.2s">
-              <h3>Result</h3>
-              <p>A cleaner concept with stronger hierarchy and three polished screens that communicate the product direction more effectively.</p>
-            </div>
-          </div>
-
-          <div class="eco-screens fade-up" style="--delay:.12s">
-            <img src="images/Image2.png" alt="EcoTrip final screens">
+          <div class="bento-section">
+            <h4>Result</h4>
+            <p>The final concept presents a more refined and user-friendly travel app that feels easier to navigate and more realistic as a product. By reducing the experience to the most important screens, I was able to create a clearer flow, stronger consistency, and a design that better reflects the style of modern apps.</p>
           </div>
         </div>
       </div>
+
+      <!-- cell 3: flowchart — col 3, row 1 -->
+      <div class="bento-cell bento-flow">
+        <img src="images/Flowchart ecotrip.png" alt="EcoTrip user flow chart">
+      </div>
+
+      <!-- cell 4: design approach text — col 1, row 2 -->
+      <div class="bento-cell bento-approach">
+        <div class="bento-approach-block">
+          <h4>Why This Direction</h4>
+          <p>The intention was to make the experience feel simpler and more premium. Instead of filling the interface with too many features, I focused on the parts that matter most to the user: understanding the product quickly, browsing without confusion, and moving smoothly toward booking.</p>
+        </div>
+        <div class="bento-approach-block">
+          <h4>Screen Logic</h4>
+          <p>Each screen was designed to do one job well. The first screen introduces the experience, the main screen supports exploration and decision-making, and the booking screen brings everything together in a way that feels clear and direct.</p>
+        </div>
+        <div class="bento-approach-block">
+          <h4>Outcome</h4>
+          <p>The result is a cleaner and more structured concept with stronger consistency across the flow. It feels more human, more current, and more believable as a real mobile app experience.</p>
+        </div>
+      </div>
+
+      <!-- cell 5: screens — col 2, row 2 -->
+      <div class="bento-cell bento-screens">
+        <img src="images/Image2.png" alt="EcoTrip app screens">
+      </div>
+
+      <!-- cell 6: future + reflection — col 3, row 2 -->
+      <div class="bento-cell bento-stats">
+        <div>
+          <div class="bento-section" style="margin-bottom:24px">
+            <h4>Next Steps</h4>
+            <p>The next stage would be refining the transitions between screens, testing how users move through the flow, and pushing the interaction design further so the concept feels even closer to a finished product.</p>
+          </div>
+          <div class="bento-section">
+            <h4>Reflection</h4>
+            <p>This project was mainly about restraint — choosing the right screens, simplifying the journey, and making the design feel contemporary without overcomplicating it. The final result communicates the idea more clearly and feels much closer to how a real app should behave.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
