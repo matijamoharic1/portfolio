@@ -508,32 +508,28 @@ a{ text-decoration:none; color:inherit; }
   max-width:18ch;
 }
 
-/* 70 / 30 split */
+/* 2-row grid: row 1 = 70/30, row 2 = full-width cards */
 .gin-layout{
   display:grid;
   grid-template-columns:7fr 3fr;
+  grid-template-rows:auto auto;
   gap:clamp(20px, 3vw, 44px);
-  align-items:start;
+  align-items:stretch;
 }
 
-/* ── left column: image + bottom cards ── */
-.gin-left{
-  display:flex;
-  flex-direction:column;
-  gap:clamp(14px, 2vw, 22px);
-}
-
-/* ── X-ray image stack ── */
+/* ── X-ray image stack: row 1, col 1 ── */
 .gin-image-reveal{
+  grid-column:1;
+  grid-row:1;
   position:relative;
   width:100%;
-  aspect-ratio:16 / 9;      /* locked to 16:9 */
   border-radius:20px;
   overflow:hidden;
   cursor:none;
   user-select:none;
   -webkit-user-select:none;
   box-shadow:0 40px 100px rgba(0,0,0,.7), 0 0 0 1px rgba(200,160,80,.08);
+  min-height:400px;
 }
 
 /* both images fill the 16:9 box */
@@ -584,8 +580,10 @@ a{ text-decoration:none; color:inherit; }
 }
 
 
-/* ── bottom cards: 3 equal columns ── */
+/* ── bottom cards: row 2, spans full width, 3 equal columns ── */
 .gin-bottom-cards{
+  grid-column:1 / -1;
+  grid-row:2;
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   gap:clamp(10px, 1.5vw, 16px);
@@ -593,7 +591,7 @@ a{ text-decoration:none; color:inherit; }
 }
 
 .gin-card{
-  background:rgba(255,255,255,.03);
+  background:transparent;
   border:1px solid rgba(200,160,80,.12);
   border-radius:16px;
   padding:clamp(14px, 2vw, 22px) clamp(14px, 2vw, 20px);
@@ -615,8 +613,10 @@ a{ text-decoration:none; color:inherit; }
 }
 
 
-/* ── right column: copy ── */
+/* ── right column: copy — row 1, col 2 ── */
 .gin-copy{
+  grid-column:2;
+  grid-row:1;
   display:flex;
   flex-direction:column;
   gap:clamp(18px, 2.5vw, 28px);
@@ -723,13 +723,9 @@ a{ text-decoration:none; color:inherit; }
     gap:28px;
   }
 
-  /* on mobile, copy comes first so context is clear before the image */
-  .gin-left{ order:2; }
-  .gin-copy{ order:1; }
-
-  .gin-bottom-cards{
-    grid-template-columns:1fr 1fr 1fr;  /* keep 3-col on phablet */
-  }
+  .gin-image-reveal{ grid-column:1; grid-row:2; }
+  .gin-copy{ grid-column:1; grid-row:1; }
+  .gin-bottom-cards{ grid-column:1; grid-row:3; grid-template-columns:1fr 1fr 1fr; }
 
   .case-info-grid{
     grid-template-columns:1fr 1fr;
@@ -781,8 +777,8 @@ a{ text-decoration:none; color:inherit; }
     grid-template-columns:1fr;
   }
 
-  .gin-left{ order:1; }
-  .gin-copy{ order:2; }
+  .gin-image-reveal{ grid-row:2; }
+  .gin-copy{ grid-row:1; }
 
   .site-nav-inner{
     flex-direction:row;
