@@ -274,7 +274,7 @@ a{ text-decoration:none; color:inherit; }
 .bento-grid{
   display:grid;
   grid-template-columns:1fr 1.4fr 1fr;
-  grid-template-rows:auto auto;
+  grid-template-rows: clamp(380px, 44vw, 580px) clamp(320px, 38vw, 500px);
   gap:0;
   padding:0 var(--gutter);
   box-sizing:border-box;
@@ -286,18 +286,19 @@ a{ text-decoration:none; color:inherit; }
   min-width:0;                /* prevents grid blowout */
 }
 
-/* cell 1: video */
+/* cell 1: video — fills full cell height */
 .bento-video{
   grid-column:1; grid-row:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:clamp(12px, 2.5vw, 20px);
-  min-height:clamp(260px, 35vw, 480px);
+  overflow:hidden;
 }
 
 .bento-video video{
-  width:clamp(100px, 60%, 260px);
+  height:100%;
+  width:auto;
+  max-width:100%;
   border-radius:28px;
   box-shadow:0 20px 60px rgba(0,0,0,.55);
 }
@@ -308,13 +309,15 @@ a{ text-decoration:none; color:inherit; }
   padding:clamp(22px, 3vw, 40px) clamp(18px, 3vw, 40px);
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:space-between;
 }
 
 .bento-info-sections{
   display:grid;
   grid-template-columns:1fr 1fr;   /* 2-col within the cell */
   gap:clamp(12px, 2vw, 20px) clamp(16px, 2.5vw, 28px);
+  height:100%;
+  align-content:space-between;
 }
 
 .bento-section h4{
@@ -338,16 +341,13 @@ a{ text-decoration:none; color:inherit; }
 /* cell 3: flowchart */
 .bento-flow{
   grid-column:3; grid-row:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:clamp(16px, 2vw, 24px) clamp(10px, 1.5vw, 16px);
+  overflow:hidden;
 }
 
 .bento-flow img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   display:block;
 }
 
@@ -357,7 +357,7 @@ a{ text-decoration:none; color:inherit; }
   padding:clamp(20px, 2.5vw, 32px) clamp(14px, 2.5vw, 28px);
   display:flex;
   flex-direction:column;
-  gap:clamp(14px, 2vw, 20px);
+  justify-content:space-between;
 }
 
 .bento-approach-block h4{
@@ -394,7 +394,7 @@ a{ text-decoration:none; color:inherit; }
   padding:clamp(20px, 2.5vw, 32px) clamp(14px, 2.5vw, 28px);
   display:flex;
   flex-direction:column;
-  gap:clamp(16px, 2vw, 24px);
+  justify-content:space-between;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -508,19 +508,17 @@ a{ text-decoration:none; color:inherit; }
   max-width:18ch;
 }
 
-/* 2-row grid: row 1 = 70/30, row 2 = full-width cards */
+/* top row only: 70% image | 30% copy */
 .gin-layout{
   display:grid;
   grid-template-columns:7fr 3fr;
-  grid-template-rows:auto auto;
   gap:clamp(20px, 3vw, 44px);
   align-items:stretch;
+  margin-bottom:clamp(20px, 3vw, 44px);
 }
 
-/* ── X-ray image stack: row 1, col 1 ── */
+/* ── X-ray image stack ── */
 .gin-image-reveal{
-  grid-column:1;
-  grid-row:1;
   position:relative;
   width:100%;
   border-radius:20px;
@@ -580,10 +578,8 @@ a{ text-decoration:none; color:inherit; }
 }
 
 
-/* ── bottom cards: row 2, spans full width, 3 equal columns ── */
+/* ── bottom cards: full-width block, 3 equal columns ── */
 .gin-bottom-cards{
-  grid-column:1 / -1;
-  grid-row:2;
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   gap:clamp(10px, 1.5vw, 16px);
@@ -613,10 +609,8 @@ a{ text-decoration:none; color:inherit; }
 }
 
 
-/* ── right column: copy — row 1, col 2 ── */
+/* ── right column: copy ── */
 .gin-copy{
-  grid-column:2;
-  grid-row:1;
   display:flex;
   flex-direction:column;
   gap:clamp(18px, 2.5vw, 28px);
