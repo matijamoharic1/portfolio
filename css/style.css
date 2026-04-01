@@ -589,33 +589,6 @@ a{ text-decoration:none; color:inherit; }
   opacity:1;
 }
 
-/* hint eye icon */
-.gin-reveal-hint{
-  position:absolute;
-  bottom:16px; right:16px;
-  z-index:6;
-  width:34px; height:34px;
-  border-radius:50%;
-  background:rgba(10,10,15,.7);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  border:1px solid rgba(200,160,80,.3);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:.65;
-  transition:opacity .25s;
-}
-
-.gin-image-reveal:hover .gin-reveal-hint{ opacity:0; }
-
-.gin-reveal-hint svg{
-  width:16px; height:16px;
-  stroke:rgba(200,160,80,.8);
-  fill:none;
-  stroke-width:2;
-  stroke-linecap:round;
-}
 
 /* ── bottom cards: Approach + Result + PS ── */
 .gin-bottom-cards{
@@ -646,18 +619,6 @@ a{ text-decoration:none; color:inherit; }
   line-height:1.65;
 }
 
-/* PS card: spans both columns, smaller + dimmer */
-.gin-card--ps{
-  grid-column:1 / -1;
-  background:transparent;
-  border-color:rgba(200,160,80,.07);
-}
-
-.gin-card--ps p{
-  font-size:clamp(.68rem, .85vw, .78rem);
-  color:rgba(255,255,255,.28);
-  font-style:italic;
-}
 
 /* ── right column: copy ── */
 .gin-copy{
