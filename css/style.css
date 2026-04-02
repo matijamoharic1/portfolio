@@ -274,7 +274,7 @@ a{ text-decoration:none; color:inherit; }
 .bento-grid{
   display:grid;
   grid-template-columns:1fr 1.4fr 1fr;
-  grid-template-rows: clamp(380px, 44vw, 580px) clamp(320px, 38vw, 500px);
+  grid-template-rows: clamp(380px, 44vw, 560px) clamp(380px, 44vw, 560px);
   gap:0;
   padding:0 var(--gutter);
   box-sizing:border-box;
@@ -282,8 +282,9 @@ a{ text-decoration:none; color:inherit; }
 
 .bento-cell{
   position:relative;
-  overflow:hidden;            /* clips content to cell, no overflow-break */
-  min-width:0;                /* prevents grid blowout */
+  overflow:hidden;
+  isolation:isolate;          /* prevents SVG filter bleed-through        */
+  min-width:0;
 }
 
 /* cell 1: video — fills full cell height */
@@ -455,17 +456,19 @@ a{ text-decoration:none; color:inherit; }
 
 .tk-row2{
   grid-template-columns:7fr 3fr;
-  height:clamp(380px, 44vw, 560px);
+  height:clamp(400px, 44vw, 560px);
 }
 
 .tk-row3{
-  height:clamp(380px, 46vw, 580px);
+  height:clamp(400px, 44vw, 560px);
 }
 
 /* ── base cell ── */
 .tk-cell{
   background:#fff;
   overflow:hidden;
+  isolation:isolate;          /* prevents SVG filter bleed-through        */
+  position:relative;
 }
 
 /* ── logo cell ── */
@@ -528,6 +531,9 @@ a{ text-decoration:none; color:inherit; }
   display:flex;
   flex-direction:column;
   gap:2px;
+  overflow:hidden;
+  isolation:isolate;
+  position:relative;
 }
 
 .tk-vid{
@@ -539,7 +545,7 @@ a{ text-decoration:none; color:inherit; }
 .tk-vid video{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   display:block;
 }
 
@@ -551,7 +557,8 @@ a{ text-decoration:none; color:inherit; }
 .tk-mockup img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
+  object-position:top center;
   display:block;
 }
 
