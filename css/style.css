@@ -347,7 +347,7 @@ a{ text-decoration:none; color:inherit; }
 .bento-flow img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -384,7 +384,7 @@ a{ text-decoration:none; color:inherit; }
 .bento-screens img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -486,7 +486,7 @@ a{ text-decoration:none; color:inherit; }
 .tk-flow img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -539,7 +539,7 @@ a{ text-decoration:none; color:inherit; }
 .tk-vid video{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -551,7 +551,7 @@ a{ text-decoration:none; color:inherit; }
 .tk-mockup img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -607,14 +607,14 @@ a{ text-decoration:none; color:inherit; }
   min-height:400px;
 }
 
-/* both images fill the 16:9 box */
+/* both images fill the container */
 .gin-img-base,
 .gin-img-top{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
