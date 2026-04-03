@@ -848,13 +848,21 @@ a{ text-decoration:none; color:inherit; }
   align-content:start;
 }
 
+/* THIS WAS MISSING */
+.mp-block{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:10px;
+}
+
 .mp-block h4{
   font-size:clamp(.62rem, .85vw, .72rem);
   font-weight:700;
   letter-spacing:.12em;
   text-transform:uppercase;
   color:rgba(0,0,0,.35);
-  margin-bottom:6px;
+  margin-bottom:2px;
 }
 
 .mp-block p,
@@ -864,7 +872,12 @@ a{ text-decoration:none; color:inherit; }
   line-height:1.6;
 }
 
-.mp-block ul{ padding-left:14px; }
+.mp-block ul{
+  padding-left:14px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
 
 /* ── row 2 text cell ── */
 .mp-row2-text{
@@ -881,15 +894,17 @@ a{ text-decoration:none; color:inherit; }
   display:flex;
   align-items:flex-start;
   justify-content:flex-start;
+  overflow:hidden;
 }
 
 .mp-monitor video{
   width:100%;
   height:auto;
   display:block;
-  object-fit:contain;
-  object-position:left top;
+  object-fit:cover;
+  object-position:center;
   position:relative;
+  transform:scale(1.03);
 }
 
 /* ──────────────────────────────────────────────────────────
