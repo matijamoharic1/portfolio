@@ -843,9 +843,16 @@ a{ text-decoration:none; color:inherit; }
 .mp-text-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:clamp(12px, 2vw, 22px);
+  gap:clamp(22px, 2.2vw, 32px);
   height:auto;
   align-content:start;
+}
+.mp-block{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:10px;
+  padding-bottom:clamp(8px, 1vw, 14px);
 }
 
 /* THIS WAS MISSING */
@@ -862,7 +869,7 @@ a{ text-decoration:none; color:inherit; }
   letter-spacing:.12em;
   text-transform:uppercase;
   color:rgba(0,0,0,.35);
-  margin-bottom:2px;
+  margin-bottom:4px;
 }
 
 .mp-block p,
@@ -888,12 +895,16 @@ a{ text-decoration:none; color:inherit; }
   background:#fff;
 }
 
+.mp-block + .mp-block{
+  margin-top:clamp(8px, 1vw, 14px);
+}
+
 .mp-monitor{
   background:#fff;
   min-height:clamp(180px, 18vw, 260px);
   display:flex;
-  align-items:flex-start;
-  justify-content:flex-start;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
 }
 
@@ -901,10 +912,10 @@ a{ text-decoration:none; color:inherit; }
   width:100%;
   height:auto;
   display:block;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
   position:relative;
-  transform:scale(1.03);
+  background:#fff;
 }
 
 /* ──────────────────────────────────────────────────────────
