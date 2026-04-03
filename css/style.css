@@ -558,12 +558,17 @@ a{ text-decoration:none; color:inherit; }
 }
 
 .gin-inner{
-  width:min(calc(100% - var(--gutter) * 2), var(--max-width));
-  margin:0 auto;
+  width:100%;
+  margin:0;
 }
 
 .gin-header{
-  margin-bottom:clamp(32px, 5vw, 56px);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+  padding:clamp(12px, 2vw, 18px) var(--gutter);
+  margin-bottom:clamp(24px, 4vw, 48px);
 }
 
 .gin-header .case-top-label{
@@ -584,6 +589,7 @@ a{ text-decoration:none; color:inherit; }
   gap:clamp(20px, 3vw, 44px);
   align-items:stretch;
   margin-bottom:clamp(20px, 3vw, 44px);
+  padding:0 var(--gutter);
 }
 
 .gin-image-reveal{
@@ -667,6 +673,7 @@ a{ text-decoration:none; color:inherit; }
   grid-template-columns:1fr 1fr 1fr;
   gap:clamp(10px, 1.5vw, 16px);
   align-items:stretch;
+  padding:0 var(--gutter);
 }
 
 .gin-card{
