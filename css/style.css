@@ -751,6 +751,118 @@ a{ text-decoration:none; color:inherit; }
 }
 
 /* ──────────────────────────────────────────────────────────
+   MODEPACK DASHBOARD
+────────────────────────────────────────────────────────── */
+.mp-section{
+  background:#ffffff;
+  padding:var(--section-v) 0;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+}
+
+.mp-head{
+  display:flex;
+  align-items:baseline;
+  gap:clamp(12px, 2vw, 20px);
+  padding:clamp(12px, 2vw, 18px) var(--gutter);
+}
+
+.mp-title{
+  font-size:clamp(1rem, 2.2vw, 1.65rem);
+  font-weight:600;
+  color:var(--text-dark);
+  letter-spacing:-.02em;
+  line-height:1.2;
+}
+
+.mp-grid{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:0 var(--gutter);
+}
+
+.mp-row{
+  display:grid;
+  gap:0;
+}
+
+/* Row 1: full-width dashboard video */
+.mp-row1{
+  height:auto;
+}
+
+/* Row 2: text 70% | monitor video 30% */
+.mp-row2{
+  grid-template-columns:7fr 3fr;
+  height:clamp(400px, 44vw, 560px);
+}
+
+.mp-cell{
+  background:#fff;
+  overflow:hidden;
+  isolation:isolate;
+  position:relative;
+}
+
+/* ── dashboard video (full-width row) ── */
+.mp-dashboard{
+  background:#0d1f18;
+}
+
+.mp-dashboard video{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* ── text info cell ── */
+.mp-info{
+  padding:clamp(24px, 3vw, 44px);
+  display:flex;
+  flex-direction:column;
+}
+
+.mp-text-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(14px, 2.5vw, 28px) clamp(24px, 4vw, 52px);
+  height:100%;
+  align-content:space-between;
+}
+
+.mp-block h4{
+  font-size:clamp(.62rem, .85vw, .72rem);
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(0,0,0,.35);
+  margin-bottom:6px;
+}
+
+.mp-block p,
+.mp-block ul{
+  font-size:clamp(.8rem, 1.1vw, .95rem);
+  color:var(--text-dark);
+  line-height:1.65;
+}
+
+.mp-block ul{ padding-left:14px; }
+
+/* ── performance monitor video cell ── */
+.mp-monitor{
+  background:#0d1f18;
+}
+
+.mp-monitor video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* ──────────────────────────────────────────────────────────
    RESPONSIVE — tablet: 2-col bento
    (bento switches to 2 columns and reconfigures)
 ────────────────────────────────────────────────────────── */
@@ -782,6 +894,15 @@ a{ text-decoration:none; color:inherit; }
   .bento-info-sections{
     grid-template-columns:1fr 1fr;
   }
+
+  /* Modepack: stack monitor below text on tablet */
+  .mp-row2{
+    grid-template-columns:1fr;
+    height:auto;
+  }
+
+  .mp-info{ height:auto; }
+  .mp-monitor{ height:clamp(200px, 36vw, 320px); }
 
 }
 
@@ -855,6 +976,9 @@ a{ text-decoration:none; color:inherit; }
   .tk-text-grid{ grid-template-columns:1fr; }
   .tk-media{ flex-direction:column; height:auto; }
   .tk-vid{ height:clamp(160px, 50vw, 260px); }
+
+  /* Modepack: single column on mobile */
+  .mp-text-grid{ grid-template-columns:1fr; }
 
   /* 3 cards collapse to 1-col on small phones */
   .gin-bottom-cards{
