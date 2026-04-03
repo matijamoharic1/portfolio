@@ -723,7 +723,7 @@ a{ text-decoration:none; color:inherit; }
   color:var(--text-dark);
   letter-spacing:-.045em;
   line-height:1.03;
-  max-width:11ch;
+  max-width:22ch;
 }
 
 .mp-ux-layout{
