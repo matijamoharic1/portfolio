@@ -538,18 +538,21 @@ a{ text-decoration:none; color:inherit; }
   overflow:hidden;
   isolation:isolate;
   position:relative;
+  background:#fff;
 }
 
 .tk-vid{
   flex:1;
-  background:#000;
+  background:#fff;
   overflow:hidden;
+  position:relative;
 }
 
 .tk-vid video{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
+  object-position:center;
   display:block;
 }
 
@@ -783,27 +786,26 @@ a{ text-decoration:none; color:inherit; }
 .mp-grid{
   display:flex;
   flex-direction:column;
-  gap:0;
+  gap:clamp(18px, 2vw, 28px);
   padding:0 var(--gutter);
 }
 
 .mp-row{
   display:grid;
-  gap:0;
+  gap:clamp(18px, 2vw, 28px);
+  align-items:start;
 }
 
-/* Row 1: dashboard video 70% | text 30% — height driven by content */
+/* Row 1: dashboard visual + text */
 .mp-row1{
   grid-template-columns:7fr 3fr;
-  height:auto;
-  align-items:stretch;
+  align-items:start;
 }
 
-/* Row 2: text 30% | performance monitor video 70% — narrower than row 1 */
+/* Row 2: text + performance monitor */
 .mp-row2{
   grid-template-columns:3fr 7fr;
-  height:clamp(200px, 26vw, 360px);
-  margin-top:2px;
+  align-items:start;
 }
 
 .mp-cell{
@@ -815,25 +817,25 @@ a{ text-decoration:none; color:inherit; }
 
 /* ── dashboard video cell ── */
 .mp-dashboard{
-  background:#0d1f18;
-  min-height:clamp(280px, 36vw, 520px);
+  background:#fff;
+  min-height:clamp(260px, 30vw, 420px);
   display:flex;
-  align-items:center;
-  justify-content:center;
+  align-items:flex-start;
+  justify-content:flex-start;
 }
 
 .mp-dashboard video{
   width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
+  height:auto;
   display:block;
+  object-fit:contain;
+  object-position:left top;
   position:relative;
 }
 
 /* ── text info cell ── */
 .mp-info{
-  padding:clamp(20px, 2.5vw, 40px);
+  padding:clamp(8px, 1vw, 16px) 0 0;
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
@@ -865,32 +867,29 @@ a{ text-decoration:none; color:inherit; }
 
 .mp-block ul{ padding-left:14px; }
 
-/* ── row 2 text cell (30%) ── */
+/* ── row 2 text cell ── */
 .mp-row2-text{
-  padding:clamp(20px, 2.5vw, 36px);
+  padding:clamp(8px, 1vw, 16px) 0 0;
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-start;
   background:#fff;
-  overflow-y:auto;
 }
 
-/* ── performance monitor video cell ── */
 .mp-monitor{
-  background:#0d1f18;
-  position:relative;
+  background:#fff;
+  min-height:clamp(180px, 18vw, 260px);
   display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:clamp(200px, 26vw, 360px);
+  align-items:flex-start;
+  justify-content:flex-start;
 }
 
 .mp-monitor video{
   width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
+  height:auto;
   display:block;
+  object-fit:contain;
+  object-position:left top;
   position:relative;
 }
 
