@@ -675,7 +675,6 @@ a{ text-decoration:none; color:inherit; }
 
 .gin-card{
   background:transparent;
-  border:1px solid rgba(200,160,80,.12);
   border-radius:16px;
   padding:clamp(14px, 2vw, 22px) clamp(14px, 2vw, 20px);
 }
