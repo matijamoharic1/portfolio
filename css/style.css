@@ -795,15 +795,17 @@ a{ text-decoration:none; color:inherit; }
   gap:0;
 }
 
-/* Row 1: dashboard video 70% | text 30% */
+/* Row 1: dashboard video 70% | text 30% — height driven by content */
 .mp-row1{
   grid-template-columns:7fr 3fr;
-  height:clamp(400px, 44vw, 560px);
+  height:auto;
+  align-items:stretch;
 }
 
 /* Row 2: full-width performance monitor video */
 .mp-row2{
   height:auto;
+  margin-top:2px;  /* subtle visual separator */
 }
 
 .mp-cell{
@@ -813,9 +815,10 @@ a{ text-decoration:none; color:inherit; }
   position:relative;
 }
 
-/* ── dashboard video (full-width row) ── */
+/* ── dashboard video cell ── */
 .mp-dashboard{
   background:#0d1f18;
+  min-height:clamp(280px, 36vw, 520px);
 }
 
 .mp-dashboard video{
@@ -823,21 +826,24 @@ a{ text-decoration:none; color:inherit; }
   height:100%;
   object-fit:cover;
   display:block;
+  position:absolute;
+  inset:0;
 }
 
 /* ── text info cell ── */
 .mp-info{
-  padding:clamp(24px, 3vw, 44px);
+  padding:clamp(20px, 2.5vw, 40px);
   display:flex;
   flex-direction:column;
+  justify-content:flex-start;
 }
 
 .mp-text-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:clamp(14px, 2.5vw, 28px) clamp(24px, 4vw, 52px);
-  height:100%;
-  align-content:space-between;
+  gap:clamp(12px, 2vw, 22px);
+  height:auto;
+  align-content:start;
 }
 
 .mp-block h4{
@@ -851,22 +857,27 @@ a{ text-decoration:none; color:inherit; }
 
 .mp-block p,
 .mp-block ul{
-  font-size:clamp(.8rem, 1.1vw, .95rem);
+  font-size:clamp(.78rem, 1.05vw, .92rem);
   color:var(--text-dark);
-  line-height:1.65;
+  line-height:1.6;
 }
 
 .mp-block ul{ padding-left:14px; }
 
 /* ── performance monitor video cell ── */
 .mp-monitor{
-  background:#fff;
+  background:#0d1f18;
+  min-height:clamp(200px, 28vw, 420px);
+  position:relative;
 }
 
 .mp-monitor video{
   width:100%;
-  height:auto;
+  height:100%;
+  object-fit:cover;
   display:block;
+  position:absolute;
+  inset:0;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -908,7 +919,9 @@ a{ text-decoration:none; color:inherit; }
     height:auto;
   }
 
-  .mp-dashboard{ height:clamp(240px, 44vw, 420px); }
+  .mp-dashboard{
+    min-height:clamp(220px, 44vw, 420px);
+  }
   .mp-info{ height:auto; }
 
 }
