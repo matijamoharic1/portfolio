@@ -44,25 +44,18 @@ if (heroEl) {
   const ring   = reveal.querySelector('.gin-xray-ring');
   if (!topImg) return;
 
-  const RADIUS = 90;    /* x-ray circle radius px          */
-  const FEATHER = 20;   /* soft edge width px               */
+  const RADIUS = 90;
+  const FEATHER = 20;
 
   let rafId = null;
   let active = false;
 
-  /* cursor target (set on mousemove / touchmove) */
   let tgtX = 0, tgtY = 0;
-  /* smoothed position (lerped toward target) */
   let curX = 0, curY = 0;
-  /* whether we have a real position yet */
   let hasPos = false;
 
   function lerp(a, b, t) { return a + (b - a) * t; }
 
-  /* Apply a circular hole in the top image at (x, y).
-     Outside the hole  → top image FULLY OPAQUE  (branded render visible)
-     Inside the hole   → top image TRANSPARENT   (3D model shows through)
-     Nothing about the base image changes — it just shows through the hole. */
   function setHole(x, y) {
     const inner = RADIUS - FEATHER;
     const mask  = `radial-gradient(circle at ${x}px ${y}px,
@@ -72,7 +65,6 @@ if (heroEl) {
     topImg.style.maskImage       = mask;
   }
 
-  /* Remove the hole — top image covers everything again */
   function removeHole() {
     topImg.style.webkitMaskImage = 'none';
     topImg.style.maskImage       = 'none';
@@ -105,13 +97,11 @@ if (heroEl) {
     };
   }
 
-  /* ── Mouse ── */
   reveal.addEventListener('mousemove', (e) => {
     const p = getPos(e);
     tgtX = p.x; tgtY = p.y;
 
     if (!hasPos) {
-      /* snap on first move so there's no drift from corner */
       curX = tgtX; curY = tgtY;
       hasPos = true;
     }
@@ -129,7 +119,6 @@ if (heroEl) {
     if (ring) { ring.style.left = '-999px'; ring.style.top = '-999px'; }
   });
 
-  /* ── Touch ── */
   function touchPos(e) {
     const t    = e.touches[0];
     const rect = reveal.getBoundingClientRect();
@@ -157,6 +146,5 @@ if (heroEl) {
   reveal.addEventListener('touchend',   endTouch);
   reveal.addEventListener('touchcancel', endTouch);
 
-  /* Start with branded image fully covering — no mask, no hole */
   removeHole();
 })();
