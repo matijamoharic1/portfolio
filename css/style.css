@@ -284,7 +284,7 @@ a{ text-decoration:none; color:inherit; }
 .bento-cell{
   position:relative;
   overflow:hidden;
-  isolation:isolate;          /* prevents SVG filter bleed-through        */
+  isolation:isolate;
   min-width:0;
 }
 
@@ -316,7 +316,7 @@ a{ text-decoration:none; color:inherit; }
 
 .bento-info-sections{
   display:grid;
-  grid-template-columns:1fr 1fr;   /* 2-col within the cell */
+  grid-template-columns:1fr 1fr;
   gap:clamp(12px, 2vw, 20px) clamp(16px, 2.5vw, 28px);
   height:100%;
   align-content:space-between;
@@ -471,7 +471,7 @@ a{ text-decoration:none; color:inherit; }
 .tk-cell{
   background:#fff;
   overflow:hidden;
-  isolation:isolate;          /* prevents SVG filter bleed-through        */
+  isolation:isolate;
   position:relative;
 }
 
@@ -549,7 +549,7 @@ a{ text-decoration:none; color:inherit; }
 .tk-vid video{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -648,7 +648,6 @@ a{ text-decoration:none; color:inherit; }
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%, -50%);
-  /* hidden until hover */
   opacity:0;
   transition:opacity .2s ease;
   border:1.5px solid rgba(200,160,80,.55);
@@ -663,13 +662,12 @@ a{ text-decoration:none; color:inherit; }
   opacity:1;
 }
 
-
 /* ── bottom cards: full-width block, 3 equal columns ── */
 .gin-bottom-cards{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   gap:clamp(10px, 1.5vw, 16px);
-  align-items:stretch;   /* equal height */
+  align-items:stretch;
 }
 
 .gin-card{
@@ -693,7 +691,6 @@ a{ text-decoration:none; color:inherit; }
   color:rgba(255,255,255,.6);
   line-height:1.65;
 }
-
 
 /* ── right column: copy ── */
 .gin-copy{
@@ -804,8 +801,8 @@ a{ text-decoration:none; color:inherit; }
 
 /* Row 2: text 30% | performance monitor video 70% — narrower than row 1 */
 .mp-row2{
-  grid-template-columns: 3fr 7fr;
-  height: clamp(200px, 26vw, 360px);
+  grid-template-columns:3fr 7fr;
+  height:clamp(200px, 26vw, 360px);
   margin-top:2px;
 }
 
@@ -820,15 +817,18 @@ a{ text-decoration:none; color:inherit; }
 .mp-dashboard{
   background:#0d1f18;
   min-height:clamp(280px, 36vw, 520px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .mp-dashboard video{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  object-position:center;
   display:block;
-  position:absolute;
-  inset:0;
+  position:relative;
 }
 
 /* ── text info cell ── */
@@ -879,20 +879,23 @@ a{ text-decoration:none; color:inherit; }
 .mp-monitor{
   background:#0d1f18;
   position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:clamp(200px, 26vw, 360px);
 }
 
 .mp-monitor video{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  object-position:center;
   display:block;
-  position:absolute;
-  inset:0;
+  position:relative;
 }
 
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — tablet: 2-col bento
-   (bento switches to 2 columns and reconfigures)
 ────────────────────────────────────────────────────────── */
 @media (max-width: 1060px){
 
@@ -901,29 +904,23 @@ a{ text-decoration:none; color:inherit; }
     grid-template-rows:auto;
   }
 
-  /* video top-left, info top-right */
   .bento-video    { grid-column:1; grid-row:1; min-height:clamp(220px, 30vw, 360px); }
   .bento-info     { grid-column:2; grid-row:1; }
-
-  /* flowchart left, approach right */
   .bento-flow     { grid-column:1; grid-row:2; }
   .bento-approach { grid-column:2; grid-row:2; }
-
-  /* screens spans full width */
   .bento-screens  { grid-column:1 / 3; grid-row:3; max-height:55vw; }
+  .bento-stats    {
+    grid-column:1 / 3;
+    grid-row:4;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:start;
+  }
 
-  /* stats spans full width, 2-col internal */
-  .bento-stats    { grid-column:1 / 3; grid-row:4;
-                    display:grid;
-                    grid-template-columns:1fr 1fr;
-                    align-items:start; }
-
-  /* 2-col within info cell too */
   .bento-info-sections{
     grid-template-columns:1fr 1fr;
   }
 
-  /* Modepack: stack rows to single column on tablet */
   .mp-row1,
   .mp-row2{
     grid-template-columns:1fr;
@@ -933,10 +930,10 @@ a{ text-decoration:none; color:inherit; }
   .mp-dashboard{
     min-height:clamp(220px, 44vw, 420px);
   }
+
   .mp-info{ height:auto; }
   .mp-row2-text{ height:auto; }
   .mp-monitor{ min-height:clamp(180px, 36vw, 320px); }
-
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -944,9 +941,11 @@ a{ text-decoration:none; color:inherit; }
 ────────────────────────────────────────────────────────── */
 @media (max-width: 780px){
 
-  /* Tiskly: collapse rows to single column */
   .tk-row1,
-  .tk-row2{ grid-template-columns:1fr; height:auto; }
+  .tk-row2{
+    grid-template-columns:1fr;
+    height:auto;
+  }
 
   .tk-row1{ height:auto; }
   .tk-logo{ height:clamp(140px, 28vw, 200px); }
@@ -958,7 +957,6 @@ a{ text-decoration:none; color:inherit; }
 
   .tk-row3{ height:clamp(280px, 55vw, 420px); }
 
-  /* Gin */
   .gin-layout{
     grid-template-columns:1fr;
     gap:28px;
@@ -967,7 +965,6 @@ a{ text-decoration:none; color:inherit; }
   .gin-image-reveal{ grid-column:1; grid-row:2; }
   .gin-copy{ grid-column:1; grid-row:1; }
   .gin-bottom-cards{ grid-column:1; grid-row:3; grid-template-columns:1fr 1fr 1fr; }
-
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -985,14 +982,17 @@ a{ text-decoration:none; color:inherit; }
   .bento-flow,
   .bento-approach,
   .bento-screens,
-  .bento-stats    { grid-column:1; grid-row:auto; }
+  .bento-stats{
+    grid-column:1;
+    grid-row:auto;
+  }
 
   .bento-info-sections{
-    grid-template-columns:1fr;     /* stack text blocks on tiny screens */
+    grid-template-columns:1fr;
   }
 
   .bento-stats{
-    grid-template-columns:1fr;     /* undo 2-col applied at 1060px */
+    grid-template-columns:1fr;
     display:flex;
     flex-direction:column;
   }
@@ -1005,15 +1005,12 @@ a{ text-decoration:none; color:inherit; }
     max-height:none;
   }
 
-  /* Tiskly: single column on mobile */
   .tk-text-grid{ grid-template-columns:1fr; }
   .tk-media{ flex-direction:column; height:auto; }
   .tk-vid{ height:clamp(160px, 50vw, 260px); }
 
-  /* Modepack: single column on mobile */
   .mp-text-grid{ grid-template-columns:1fr; }
 
-  /* 3 cards collapse to 1-col on small phones */
   .gin-bottom-cards{
     grid-template-columns:1fr;
   }
@@ -1026,5 +1023,4 @@ a{ text-decoration:none; color:inherit; }
     flex-wrap:wrap;
     gap:8px;
   }
-
 }
