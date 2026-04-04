@@ -264,11 +264,6 @@ a{ text-decoration:none; color:inherit; }
 /* ──────────────────────────────────────────────────────────
    MODEPACK UX CASE
 ────────────────────────────────────────────────────────── */
-.mp-ux-left-stack{
-  display:grid;
-  gap:clamp(22px, 2.4vw, 28px);
-}
-
 .mp-ux-section{
   background:#ffffff;
   padding:var(--section-v) 0;
@@ -302,28 +297,28 @@ a{ text-decoration:none; color:inherit; }
   gap:clamp(24px, 3vw, 34px);
 }
 
-.mp-ux-first-row{
+.mp-ux-top-grid{
   display:grid;
-  grid-template-columns:minmax(0, 1.1fr) minmax(0, .8fr) minmax(0, .9fr);
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:0;
+  border:1px solid var(--line-dark);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  background:#fff;
+}
+
+.mp-ux-main-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
   gap:clamp(22px, 2.4vw, 28px);
   align-items:start;
 }
 
-.mp-ux-side-stack{
-  display:grid;
-  grid-template-columns:1fr;
+.mp-ux-column{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
   gap:clamp(22px, 2.4vw, 28px);
-}
-
-.mp-ux-second-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:clamp(22px, 2.4vw, 28px);
-  align-items:start;
-}
-
-.mp-ux-data-row{
-  width:100%;
 }
 
 .mp-ux-block{
@@ -331,6 +326,16 @@ a{ text-decoration:none; color:inherit; }
   flex-direction:column;
   gap:10px;
   background:#fff;
+}
+
+.mp-ux-top-grid .mp-ux-block{
+  min-height:100%;
+  padding:var(--card-pad);
+  border-right:1px solid var(--line-dark);
+}
+
+.mp-ux-top-grid .mp-ux-block:last-child{
+  border-right:none;
 }
 
 .mp-ux-block-large{
@@ -473,12 +478,6 @@ a{ text-decoration:none; color:inherit; }
 }
 
 .order-dashboard-layout{
-  display:flex;
-  flex-direction:column;
-  gap:clamp(24px, 2.4vw, 30px);
-}
-
-.order-dashboard-top{
   display:grid;
   grid-template-columns:minmax(0, 62%) minmax(0, 38%);
   gap:clamp(28px, 3vw, 42px);
@@ -502,17 +501,10 @@ a{ text-decoration:none; color:inherit; }
   border-radius:12px;
 }
 
-.order-dashboard-side{
+.order-dashboard-text-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:clamp(14px, 1.8vw, 20px);
-}
-
-.order-dashboard-six-grid{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:clamp(14px, 1.8vw, 20px);
-  align-items:start;
 }
 
 .order-dashboard-block{
@@ -756,7 +748,7 @@ a{ text-decoration:none; color:inherit; }
 
 .tk-row2{
   grid-template-columns:7fr 3fr;
-  height:auto;
+  height:clamp(400px, 44vw, 560px);
 }
 
 .tk-row3{
@@ -824,34 +816,29 @@ a{ text-decoration:none; color:inherit; }
   padding-left:14px;
 }
 
-.tk-media-cards{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:clamp(18px, 2vw, 24px);
-  background:#fff;
-  padding:clamp(18px, 2vw, 24px);
-  align-content:start;
-}
-
-.tk-phone-card{
-  margin:0;
-  border:1px solid var(--line-dark);
-  border-radius:var(--radius-md);
-  padding:clamp(14px, 1.8vw, 18px);
-  background:#fff;
-  box-shadow:var(--soft-shadow);
+.tk-media{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
   overflow:hidden;
+  isolation:isolate;
+  position:relative;
+  background:var(--line-dark);
 }
 
-.tk-phone-card video{
+.tk-vid{
+  flex:1;
+  background:#fff;
+  overflow:hidden;
+  position:relative;
+}
+
+.tk-vid video{
   width:100%;
   height:100%;
-  min-height:clamp(180px, 18vw, 240px);
-  display:block;
-  background:#fff;
-  border-radius:14px;
   object-fit:cover;
   object-position:center;
+  display:block;
 }
 
 .tk-mockup img{
@@ -995,12 +982,6 @@ a{ text-decoration:none; color:inherit; }
   background:#fff;
 }
 
-.mp-monitor-stack{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:clamp(18px, 2vw, 24px);
-}
-
 .mp-monitor{
   background:#fff;
   min-height:clamp(180px, 18vw, 260px);
@@ -1013,8 +994,7 @@ a{ text-decoration:none; color:inherit; }
   padding:clamp(12px, 1.4vw, 16px);
 }
 
-.mp-monitor video,
-.mp-monitor img{
+.mp-monitor video{
   width:100%;
   height:auto;
   display:block;
@@ -1023,12 +1003,6 @@ a{ text-decoration:none; color:inherit; }
   position:relative;
   background:#fff;
   border-radius:12px;
-}
-
-.mp-card-grid-horizontal{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:clamp(14px, 1.8vw, 20px);
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -1081,11 +1055,23 @@ a{ text-decoration:none; color:inherit; }
     gap:10px;
   }
 
-  .mp-ux-first-row,
-  .mp-ux-second-row,
-  .order-dashboard-top,
-  .order-dashboard-six-grid,
-  .mp-card-grid-horizontal{
+  .mp-ux-top-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .mp-ux-top-grid .mp-ux-block:nth-child(2n){
+    border-right:none;
+  }
+
+  .mp-ux-top-grid .mp-ux-block:nth-child(-n + 2){
+    border-bottom:1px solid var(--line-dark);
+  }
+
+  .mp-ux-main-grid{
+    grid-template-columns:1fr;
+  }
+
+  .order-dashboard-layout{
     grid-template-columns:1fr;
   }
 
@@ -1140,15 +1126,27 @@ a{ text-decoration:none; color:inherit; }
   .tk-logo{ height:clamp(140px, 28vw, 200px); }
   .tk-flow{ height:clamp(200px, 40vw, 320px); }
   .tk-text{ height:auto; }
-  .tk-text-grid{ grid-template-columns:1fr; }
-  .tk-media-cards{ padding:18px; }
-  .order-dashboard-six-grid{ grid-template-columns:1fr; }
+  .tk-media{ flex-direction:row; height:clamp(180px, 36vw, 260px); }
+  .tk-row3{ height:clamp(280px, 55vw, 420px); }
 }
 
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — mobile
 ────────────────────────────────────────────────────────── */
 @media (max-width: 580px){
+
+  .mp-ux-top-grid{
+    grid-template-columns:1fr;
+  }
+
+  .mp-ux-top-grid .mp-ux-block{
+    border-right:none;
+    border-bottom:1px solid var(--line-dark);
+  }
+
+  .mp-ux-top-grid .mp-ux-block:last-child{
+    border-bottom:none;
+  }
 
   .mp-ux-phones{
     grid-template-columns:1fr;
@@ -1186,6 +1184,19 @@ a{ text-decoration:none; color:inherit; }
 
   .bento-screens{
     max-height:none;
+  }
+
+  .tk-text-grid{
+    grid-template-columns:1fr;
+  }
+
+  .tk-media{
+    flex-direction:column;
+    height:auto;
+  }
+
+  .tk-vid{
+    height:clamp(160px, 50vw, 260px);
   }
 
   .site-nav-inner{
