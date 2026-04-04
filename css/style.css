@@ -864,9 +864,7 @@ a{ text-decoration:none; color:inherit; }
   display:block;
 }
 
-/* ──────────────────────────────────────────────────────────
-   MODEPACK
-────────────────────────────────────────────────────────── */
+
 /* ──────────────────────────────────────────────────────────
    MODEPACK
 ────────────────────────────────────────────────────────── */
@@ -903,8 +901,7 @@ a{ text-decoration:none; color:inherit; }
   gap:clamp(18px, 2vw, 28px);
 }
 
-
-.mp-top{
+ .mp-top{
     grid-template-columns:1fr;
   }
 
@@ -927,8 +924,8 @@ a{ text-decoration:none; color:inherit; }
   gap:clamp(14px, 1.8vw, 20px);
 }
 
-  .mp-bottom-grid{
-    grid-template-columns:1fr;
+.mp-bottom-grid{
+    grid-template-columns:1fr 1fr;
   }
 
 .mp-cell{
@@ -1107,7 +1104,7 @@ a{ text-decoration:none; color:inherit; }
     height:auto;
   }
 
-  .mp-dashboard{
+  mp-dashboard{
     min-height:clamp(220px, 44vw, 420px);
   }
 
