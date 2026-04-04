@@ -1051,15 +1051,173 @@ a{ text-decoration:none; color:inherit; }
 }
 
 /* ──────────────────────────────────────────────────────────
-   RESPONSIVE — mobile
+   MOBILE — stack everything for readability
 ────────────────────────────────────────────────────────── */
-@media (max-width: 580px){
+@media (max-width: 768px){
 
-  .mp-media-column{
+  :root{
+    --section-v: 56px;
+    --card-pad: 16px;
+    --gutter: 18px;
+  }
+
+  .site-nav-inner{
+    width:min(calc(100% - 24px), var(--max-width));
+    padding:12px 0;
+  }
+
+  .site-menu{
+    gap:6px;
+  }
+
+  .hero-header-inner{
+    padding:110px 18px 48px;
+  }
+
+  .case-shell,
+  .mp-ux-shell{
+    width:min(calc(100% - 24px), var(--max-width));
+    padding-top:24px;
+  }
+
+  .mp-ux-head,
+  .order-dashboard-head,
+  .bento-header,
+  .tk-head,
+  .mp-head{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding-bottom:20px;
+    margin-bottom:20px;
+  }
+
+  /* MODEPACK UX */
+  .mp-ux-main-grid,
+  .mp-ux-phones{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .mp-ux-column{
+    gap:16px;
+  }
+
+  .mp-ux-block,
+  .mp-ux-media-card,
+  .mp-ux-phone{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  /* ORDER DASHBOARD */
+  .order-dashboard-top,
+  .order-dashboard-bottom-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .order-dashboard-content{
+    gap:16px;
+  }
+
+  .order-dashboard-block,
+  .order-dashboard-image-wrap{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  /* ECOTRIP */
+  .bento-grid{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+    gap:1px;
+  }
+
+  .bento-video,
+  .bento-info,
+  .bento-flow,
+  .bento-approach,
+  .bento-screens,
+  .bento-stats{
+    grid-column:auto;
+    grid-row:auto;
+  }
+
+  .bento-video{
+    min-height:320px;
+  }
+
+  .bento-video video{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  .bento-info,
+  .bento-approach,
+  .bento-stats{
+    padding:18px 16px;
+  }
+
+  .bento-info-sections{
+    grid-template-columns:1fr;
     gap:18px;
   }
 
-  .mp-bottom-grid{
+  .bento-flow img,
+  .bento-screens img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+  }
+
+  /* TISKLY */
+  .tk-row,
+  .tk-row1,
+  .tk-row2{
     grid-template-columns:1fr;
+    height:auto;
+  }
+
+  .tk-grid{
+    gap:1px;
+  }
+
+  .tk-text{
+    padding:18px 16px;
+  }
+
+  .tk-text-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+    height:auto;
+  }
+
+  .tk-media{
+    gap:1px;
+  }
+
+  .tk-vid{
+    min-height:280px;
+  }
+
+  /* MODEPACK */
+  .mp-top,
+  .mp-bottom-grid,
+  .mp-card-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .mp-layout,
+  .mp-media-column{
+    gap:16px;
+  }
+
+  .mp-block,
+  .mp-dashboard,
+  .mp-monitor{
+    padding:16px;
+    border-radius:18px;
   }
 }
