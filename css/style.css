@@ -788,7 +788,7 @@ a{ text-decoration:none; color:inherit; }
 }
 
 .tk-text{
-  padding:0;
+  padding:clamp(24px, 3vw, 44px);
   display:flex;
   flex-direction:column;
 }
@@ -796,18 +796,9 @@ a{ text-decoration:none; color:inherit; }
 .tk-text-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:clamp(18px, 2vw, 24px);
-}
-
-.tk-block{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  border:1px solid var(--line-dark);
-  border-radius:var(--radius-md);
-  padding:clamp(18px, 2.2vw, 28px);
-  background:#fff;
-  box-shadow:var(--soft-shadow);
+  gap:clamp(14px, 2.5vw, 28px) clamp(24px, 4vw, 52px);
+  height:100%;
+  align-content:space-between;
 }
 
 .tk-block h4{
@@ -845,9 +836,6 @@ a{ text-decoration:none; color:inherit; }
   background:#fff;
   overflow:hidden;
   position:relative;
-  border:1px solid var(--line-dark);
-  border-radius:var(--radius-md);
-  box-shadow:var(--soft-shadow);
 }
 
 .tk-vid video{
@@ -864,10 +852,6 @@ a{ text-decoration:none; color:inherit; }
   display:block;
 }
 
-
-/* ──────────────────────────────────────────────────────────
-   MODEPACK
-────────────────────────────────────────────────────────── */
 /* ──────────────────────────────────────────────────────────
    MODEPACK
 ────────────────────────────────────────────────────────── */
