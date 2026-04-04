@@ -855,9 +855,6 @@ a{ text-decoration:none; color:inherit; }
 /* ──────────────────────────────────────────────────────────
    MODEPACK
 ────────────────────────────────────────────────────────── */
-/* ──────────────────────────────────────────────────────────
-   MODEPACK
-────────────────────────────────────────────────────────── */
 .mp-section{
   background:#ffffff;
   padding:var(--section-v) 0;
@@ -893,7 +890,7 @@ a{ text-decoration:none; color:inherit; }
 
 .mp-top{
   display:grid;
-  grid-template-columns:minmax(0, 44%) minmax(0, 56%);
+  grid-template-columns:minmax(0, 70%) minmax(0, 30%);
   gap:clamp(22px, 2.5vw, 30px);
   align-items:start;
 }
@@ -911,7 +908,7 @@ a{ text-decoration:none; color:inherit; }
 
 .mp-card-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
   gap:clamp(14px, 1.8vw, 20px);
 }
 
