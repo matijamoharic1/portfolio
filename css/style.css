@@ -855,6 +855,9 @@ a{ text-decoration:none; color:inherit; }
 /* ──────────────────────────────────────────────────────────
    MODEPACK
 ────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   MODEPACK
+────────────────────────────────────────────────────────── */
 .mp-section{
   background:#ffffff;
   padding:var(--section-v) 0;
@@ -885,84 +888,65 @@ a{ text-decoration:none; color:inherit; }
 .mp-layout{
   display:flex;
   flex-direction:column;
-  gap:clamp(18px, 2vw, 28px);
+  gap:clamp(22px, 2.5vw, 30px);
 }
 
 .mp-top{
-    grid-template-columns:1fr;
-  }
+  display:grid;
+  grid-template-columns:minmax(0, 44%) minmax(0, 56%);
+  gap:clamp(22px, 2.5vw, 30px);
+  align-items:start;
+}
 
 .mp-media-column{
   display:flex;
   flex-direction:column;
-  gap:clamp(18px, 2vw, 28px);
+  gap:clamp(22px, 2.5vw, 30px);
   min-width:0;
 }
 
 .mp-info-column{
-  display:flex;
-  flex-direction:column;
   min-width:0;
 }
 
 .mp-card-grid{
   display:grid;
-  grid-template-columns:1fr;
+  grid-template-columns:1fr 1fr;
   gap:clamp(14px, 1.8vw, 20px);
 }
 
 .mp-bottom-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-.mp-cell{
-  background:#fff;
-  overflow:hidden;
-  isolation:isolate;
-  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:clamp(14px, 1.8vw, 20px);
 }
 
-.mp-dashboard{
-  background:#fff;
-  min-height:clamp(260px, 30vw, 420px);
-  display:flex;
-  align-items:flex-start;
-  justify-content:flex-start;
-  border:1px solid var(--line-dark);
-  border-radius:var(--radius-md);
-  padding:clamp(12px, 1.4vw, 16px);
-  box-shadow:var(--soft-shadow);
-}
-
-.mp-dashboard video{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-  object-position:left top;
-  border-radius:12px;
-}
-
+.mp-dashboard,
 .mp-monitor{
   background:#fff;
-  min-height:clamp(180px, 18vw, 260px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
   border:1px solid var(--line-dark);
   border-radius:var(--radius-md);
   padding:clamp(12px, 1.4vw, 16px);
   box-shadow:var(--soft-shadow);
+  overflow:hidden;
 }
 
+.mp-dashboard video,
 .mp-monitor video{
   width:100%;
   height:auto;
   display:block;
   object-fit:contain;
-  object-position:center;
   background:#fff;
   border-radius:12px;
+}
+
+.mp-dashboard video{
+  object-position:left top;
+}
+
+.mp-monitor video{
+  object-position:center;
 }
 
 .mp-block{
@@ -1042,146 +1026,51 @@ a{ text-decoration:none; color:inherit; }
 ────────────────────────────────────────────────────────── */
 @media (max-width: 1060px){
 
-  .mp-ux-head,
-  .order-dashboard-head,
-  .bento-header,
-  .tk-head,
-  .mp-head{
-    grid-template-columns:1fr;
-    gap:10px;
-  }
-
-  .mp-ux-main-grid{
+  .mp-top{
     grid-template-columns:1fr;
   }
 
-  .order-dashboard-top{
-  grid-template-columns:1fr;
-}
-
-.order-dashboard-bottom-grid{
-  grid-template-columns:1fr 1fr;
-}
-
-  .bento-grid{
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:auto;
-  }
-
-  .bento-video{ grid-column:1; grid-row:1; min-height:clamp(220px, 30vw, 360px); }
-  .bento-info{ grid-column:2; grid-row:1; }
-  .bento-flow{ grid-column:1; grid-row:2; }
-  .bento-approach{ grid-column:2; grid-row:2; }
-  .bento-screens{ grid-column:1 / 3; grid-row:3; max-height:55vw; }
-  .bento-stats{
-    grid-column:1 / 3;
-    grid-row:4;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:start;
-  }
-
-  .bento-info-sections{
+  .mp-card-grid{
     grid-template-columns:1fr 1fr;
   }
 
-  .mp-row1,
-  .mp-row2{
+  .mp-bottom-grid{
     grid-template-columns:1fr;
-    height:auto;
   }
 
-  mp-dashboard{
+  .mp-dashboard{
     min-height:clamp(220px, 44vw, 420px);
   }
 
-  .mp-info{ height:auto; }
-  .mp-row2-text{ height:auto; }
   .mp-monitor{
     min-height:clamp(180px, 36vw, 320px);
   }
+}
+
 
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — phablet
 ────────────────────────────────────────────────────────── */
 @media (max-width: 780px){
 
-  .tk-row1,
-  .tk-row2{
+  .mp-card-grid{
     grid-template-columns:1fr;
-    height:auto;
   }
 
-  .tk-logo{ height:clamp(140px, 28vw, 200px); }
-  .tk-flow{ height:clamp(200px, 40vw, 320px); }
-  .tk-text{ height:auto; }
-  .tk-media{ flex-direction:row; height:clamp(180px, 36vw, 260px); }
-  .tk-row3{ height:clamp(280px, 55vw, 420px); }
 }
+
 
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — mobile
 ────────────────────────────────────────────────────────── */
 @media (max-width: 580px){
 
-   .order-dashboard-bottom-grid{
-  grid-template-columns:1fr;
-}
-
-  .mp-ux-phones{
+  .mp-bottom-grid{
     grid-template-columns:1fr;
+  }
+
+  .mp-media-column{
     gap:18px;
   }
 
-  .bento-grid{
-    grid-template-columns:1fr;
-    padding:0;
-  }
-
-  .bento-video,
-  .bento-info,
-  .bento-flow,
-  .bento-approach,
-  .bento-screens,
-  .bento-stats{
-    grid-column:1;
-    grid-row:auto;
-  }
-
-  .bento-info-sections{
-    grid-template-columns:1fr;
-  }
-
-  .bento-stats{
-    grid-template-columns:1fr;
-    display:flex;
-    flex-direction:column;
-  }
-
-  .bento-video{
-    min-height:clamp(200px, 60vw, 340px);
-  }
-
-  .bento-screens{
-    max-height:none;
-  }
-
-  .tk-text-grid{
-    grid-template-columns:1fr;
-  }
-
-  .tk-media{
-    flex-direction:column;
-    height:auto;
-  }
-
-  .tk-vid{
-    height:clamp(160px, 50vw, 260px);
-  }
-
-  .site-nav-inner{
-    flex-direction:row;
-    flex-wrap:wrap;
-    gap:8px;
-  }
 }
