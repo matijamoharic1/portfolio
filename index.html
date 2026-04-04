@@ -384,7 +384,7 @@
 
   </section>
 
-  <!-- ── MODEPACK ── -->
+    <!-- ── MODEPACK ── -->
   <section class="mp-section" id="modepack">
 
     <div class="case-shell">
@@ -393,19 +393,29 @@
         <h2 class="mp-title">Modepack — Sales Performance Dashboard</h2>
       </div>
 
-      <div class="mp-grid fade-up">
+      <div class="mp-layout fade-up">
 
-        <div class="mp-row mp-row1">
+        <!-- TOP -->
+        <div class="mp-top">
 
-          <div class="mp-cell mp-dashboard">
-            <video autoplay muted loop playsinline preload="auto">
-              <source src="images/Dashbord .mp4" type="video/mp4">
-            </video>
+          <!-- LEFT: 70% -->
+          <div class="mp-media-column">
+            <div class="mp-dashboard">
+              <video autoplay muted loop playsinline preload="auto">
+                <source src="images/Dashbord .mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="mp-monitor">
+              <video autoplay muted loop playsinline preload="auto">
+                <source src="images/performance-monitor.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
 
-          <div class="mp-cell mp-info">
+          <!-- RIGHT: 30% -->
+          <div class="mp-info-column">
             <div class="mp-card-grid">
-
               <div class="mp-block">
                 <h4>Overview</h4>
                 <p>Modepack is a B2B sales analytics platform designed to centralise performance data and make it immediately actionable. The dashboard gives sales teams a single, focused view of their most critical metrics — from net revenue to distribution stage progress.</p>
@@ -439,45 +449,31 @@
                   <li>Modular layout designed to scale across screen sizes</li>
                 </ul>
               </div>
-
             </div>
           </div>
 
         </div>
 
-        <div class="mp-row mp-row2">
-
-          <div class="mp-cell mp-row2-text">
-            <div class="mp-card-grid mp-card-grid-bottom">
-
-              <div class="mp-block">
-                <h4>Interactions &amp; Motion</h4>
-                <p>Motion plays a key role in enhancing usability. Micro-interactions provide feedback when users interact with elements. Animated charts help users understand changes over time more intuitively.</p>
-              </div>
-
-              <div class="mp-block">
-                <h4>Future Improvements</h4>
-                <ul>
-                  <li>Customisable widget layout per user role</li>
-                  <li>Deeper drill-down into individual metrics</li>
-                  <li>Automated reporting and export features</li>
-                </ul>
-              </div>
-
-              <div class="mp-block">
-                <h4>Reflection</h4>
-                <p>Designing a dashboard means making hard decisions about what to show and what to remove. This project pushed me to prioritise ruthlessly — every element had to earn its place.</p>
-              </div>
-
-            </div>
+        <!-- BOTTOM -->
+        <div class="mp-bottom-grid">
+          <div class="mp-block">
+            <h4>Interaction &amp; Motion</h4>
+            <p>Motion plays a key role in enhancing usability. Micro-interactions provide feedback when users interact with elements. Animated charts help users understand changes over time more intuitively.</p>
           </div>
 
-          <div class="mp-cell mp-monitor">
-            <video autoplay muted loop playsinline preload="auto">
-              <source src="images/performance-monitor.mp4" type="video/mp4">
-            </video>
+          <div class="mp-block">
+            <h4>Future Improvements</h4>
+            <ul>
+              <li>Customisable widget layout per user role</li>
+              <li>Deeper drill-down into individual metrics</li>
+              <li>Automated reporting and export features</li>
+            </ul>
           </div>
 
+          <div class="mp-block">
+            <h4>Reflection</h4>
+            <p>Designing a dashboard means making hard decisions about what to show and what to remove. This project pushed me to prioritise ruthlessly — every element had to earn its place.</p>
+          </div>
         </div>
 
       </div>
