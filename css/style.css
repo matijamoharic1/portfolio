@@ -868,6 +868,9 @@ a{ text-decoration:none; color:inherit; }
 /* ──────────────────────────────────────────────────────────
    MODEPACK
 ────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   MODEPACK
+────────────────────────────────────────────────────────── */
 .mp-section{
   background:#ffffff;
   padding:var(--section-v) 0;
@@ -901,7 +904,7 @@ a{ text-decoration:none; color:inherit; }
   gap:clamp(18px, 2vw, 28px);
 }
 
- .mp-top{
+.mp-top{
     grid-template-columns:1fr;
   }
 
