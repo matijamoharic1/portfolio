@@ -1040,7 +1040,6 @@ a{ text-decoration:none; color:inherit; }
   }
 }
 
-
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — phablet
 ────────────────────────────────────────────────────────── */
@@ -1049,9 +1048,7 @@ a{ text-decoration:none; color:inherit; }
   .mp-card-grid{
     grid-template-columns:1fr;
   }
-
 }
-
 
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — mobile
@@ -1065,5 +1062,4 @@ a{ text-decoration:none; color:inherit; }
   .mp-bottom-grid{
     grid-template-columns:1fr;
   }
-
 }
