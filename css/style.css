@@ -890,7 +890,7 @@ a{ text-decoration:none; color:inherit; }
 
 .mp-top{
   display:grid;
-  grid-template-columns:minmax(0, 70%) minmax(0, 30%);
+  grid-template-columns:minmax(0, 60%) minmax(0, 40%);
   gap:clamp(22px, 2.5vw, 30px);
   align-items:start;
 }
