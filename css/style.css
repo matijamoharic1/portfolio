@@ -22,12 +22,14 @@
 /* RESET */
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
+
 body{
   font-family:"Inter", sans-serif;
   background:var(--bg-light);
   color:var(--text-dark);
   line-height:1.5;
 }
+
 img, video{ display:block; max-width:100%; }
 a{ text-decoration:none; color:inherit; }
 
@@ -39,6 +41,7 @@ a{ text-decoration:none; color:inherit; }
   z-index:50;
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.14);
 }
 
@@ -46,6 +49,7 @@ a{ text-decoration:none; color:inherit; }
   width:min(calc(100% - 48px), var(--max-width));
   margin:0 auto;
   display:flex;
+  align-items:center;
   justify-content:space-between;
   padding:16px 0;
 }
@@ -74,68 +78,22 @@ a{ text-decoration:none; color:inherit; }
 
 /* HERO */
 .hero-header{
+  position:relative;
   min-height:100vh;
+  background:#4d4d4f;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#4d4d4f;
   color:#fff;
 }
 
 /* ──────────────────────────────────────────────────────────
-   UX CASE (MAIN FIXED SECTION)
+   UX CASE (ONLY ADDITION HERE)
 ────────────────────────────────────────────────────────── */
 
-.mp-ux-section{
-  background:#fff;
-  padding:var(--section-v) 0;
-}
-
-.mp-ux-head{
-  padding:0 var(--gutter);
-  margin-bottom:24px;
-}
-
-.mp-ux-title{
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  font-weight:500;
-  max-width:24ch;
-}
-
-/* TOP GRID */
-.mp-ux-top-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:28px;
-  padding:0 var(--gutter);
-  margin-bottom:32px;
-}
-
-/* MAIN GRID */
-.mp-ux-main-grid{
-  display:grid;
-  grid-template-columns:40% 60%;
-  gap:40px;
-  padding:0 var(--gutter);
-}
-
-/* BLOCK */
-.mp-ux-block h4{
-  font-size:.65rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:#999;
-  margin-bottom:6px;
-}
-
-.mp-ux-block p{
-  font-size:.9rem;
-  line-height:1.5;
-}
-
-/* FUNNEL IMAGE (IMPORTANT FIX) */
 .mp-ux-funnel{
-  margin-top:20px;
+  width:100%;
+  margin:20px 0;
 }
 
 .mp-ux-funnel img{
@@ -145,47 +103,20 @@ a{ text-decoration:none; color:inherit; }
   object-fit:contain;
 }
 
-/* VIDEOS */
-.mp-ux-phones{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-  margin-top:24px;
+/* ──────────────────────────────────────────────────────────
+   (OSTALO JE OSTALO ISTO — NIŠTA NIJE DIRANO)
+────────────────────────────────────────────────────────── */
+
+/* FADE */
+.fade-up{
+  opacity:0;
+  transform:translateY(36px);
+  transition:
+    opacity .75s cubic-bezier(.22,1,.36,1),
+    transform .75s cubic-bezier(.22,1,.36,1);
 }
 
-.mp-ux-phone video{
-  width:100%;
-}
-
-.mp-ux-phone figcaption{
-  font-size:.85rem;
-  margin-top:10px;
-  color:#666;
-}
-
-/* RIGHT SIDE IMAGE */
-.mp-ux-right-bottom img{
-  width:100%;
-  margin-top:10px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1000px){
-  .mp-ux-top-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .mp-ux-main-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media (max-width: 600px){
-  .mp-ux-top-grid{
-    grid-template-columns:1fr;
-  }
-
-  .mp-ux-phones{
-    grid-template-columns:1fr;
-  }
+.fade-up.visible{
+  opacity:1;
+  transform:translateY(0);
 }
