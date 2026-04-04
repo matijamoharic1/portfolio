@@ -264,6 +264,11 @@ a{ text-decoration:none; color:inherit; }
 /* ──────────────────────────────────────────────────────────
    MODEPACK UX CASE
 ────────────────────────────────────────────────────────── */
+.mp-ux-left-stack{
+  display:grid;
+  gap:clamp(22px, 2.4vw, 28px);
+}
+
 .mp-ux-section{
   background:#ffffff;
   padding:var(--section-v) 0;
