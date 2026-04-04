@@ -867,6 +867,9 @@ a{ text-decoration:none; color:inherit; }
 /* ──────────────────────────────────────────────────────────
    MODEPACK
 ────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   MODEPACK
+────────────────────────────────────────────────────────── */
 .mp-section{
   background:#ffffff;
   padding:var(--section-v) 0;
@@ -900,34 +903,33 @@ a{ text-decoration:none; color:inherit; }
   gap:clamp(18px, 2vw, 28px);
 }
 
+
 .mp-top{
-  display:grid;
-  grid-template-columns:minmax(0, 48%) minmax(0, 52%);
-  gap:clamp(18px, 2vw, 28px);
-  align-items:start;
-}
+    grid-template-columns:1fr;
+  }
 
 .mp-media-column{
   display:flex;
   flex-direction:column;
   gap:clamp(18px, 2vw, 28px);
+  min-width:0;
 }
 
 .mp-info-column{
   display:flex;
   flex-direction:column;
+  min-width:0;
 }
 
 .mp-card-grid{
   display:grid;
+  grid-template-columns:1fr;
   gap:clamp(14px, 1.8vw, 20px);
 }
 
-.mp-bottom-grid{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:clamp(14px, 1.8vw, 20px);
-}
+  .mp-bottom-grid{
+    grid-template-columns:1fr;
+  }
 
 .mp-cell{
   background:#fff;
@@ -954,7 +956,6 @@ a{ text-decoration:none; color:inherit; }
   display:block;
   object-fit:contain;
   object-position:left top;
-  position:relative;
   border-radius:12px;
 }
 
@@ -964,7 +965,6 @@ a{ text-decoration:none; color:inherit; }
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
   border:1px solid var(--line-dark);
   border-radius:var(--radius-md);
   padding:clamp(12px, 1.4vw, 16px);
@@ -977,7 +977,6 @@ a{ text-decoration:none; color:inherit; }
   display:block;
   object-fit:contain;
   object-position:center;
-  position:relative;
   background:#fff;
   border-radius:12px;
 }
@@ -1114,8 +1113,9 @@ a{ text-decoration:none; color:inherit; }
 
   .mp-info{ height:auto; }
   .mp-row2-text{ height:auto; }
-  .mp-monitor{ min-height:clamp(180px, 36vw, 320px); }
-}
+  .mp-monitor{
+    min-height:clamp(180px, 36vw, 320px);
+  }
 
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE — phablet
